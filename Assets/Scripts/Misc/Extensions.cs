@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEditor;
+using System.Collections;
 
 namespace Extensions
 {
@@ -144,6 +145,11 @@ namespace Extensions
         public static float AngleBetweenPoints_(this Vector3 vertexPoint, Vector3 point1, Vector3 point2)
         {
             return Vector3.Angle(point1 - vertexPoint, point2 - vertexPoint);
+        }
+
+        public static IEnumerator WaitForSeconds(this MonoBehaviour _, float time_)
+        {
+            yield return new WaitForSeconds(time_);            
         }
 
         public static void InstantiatePrefabsAndGetComponents<T>(this MonoBehaviour _, List<GameObject> prefabs_, List<GameObject> objects_, List<T> components_)

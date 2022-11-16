@@ -6,26 +6,71 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab;
     private CharacterController characterController;
 
-    public float acceleration, lostToGripRate, deceleration, targetForwardSpeed, targetBackwardSpeed;
-    public float moveSpeed, currentSpeed; 
-    
-    public float minRotateAmount, maxRotateAmount, minRotateForwardSpeed, maxRotateForwardSpeed, maxRotateBackwardSpeed, minRotateBackwardSpeed;
-    private float rotateAmount, rotateSum;    
+    public GameObject groundCheckerObject;
+    internal GeoChecker groundChecker;
+
+    public GameObject frontCheckerObject;
+    internal GeoChecker frontChecker;
+
+    [Header("Gravity")]
+    public float gravityStrength;
+    public float downSpeed;
+    public float downMove;
+
+    [Space]
+    [Header("Movement")]
+
+    public float jumpHeight;
+
+    public float acceleration;
+    public float deceleration;
+    public float turningLostToGripRate;
+    public float normalLostToGripRate;
+    public float lostToGripRate;
+    public float normalTargetForwardSpeed;
+    public float lowerTargetForwardSpeed;
+    public float targetForwardSpeed;
+    public float targetBackwardSpeed;
+    public float moveSpeed;
+    public float currentSpeed;
+
+    [Space]
+    [Header("Rotation")]
+    public float minRotateAmount;
+    public float maxRotateAmount;
+    public float minRotateForwardSpeed;
+    public float maxRotateForwardSpeed;
+    public float maxRotateBackwardSpeed;
+    public float minRotateBackwardSpeed;
+    public float rotateAmount;
+    public float rotateSum;
+
+    [Space]
+    [Header("State")]
+    public bool turning;
+    public bool turningLeft;
+    public bool turningRight;
+
+    public bool moving;
+    public bool movingForward;
+    public bool movingBackward;
+
+    public bool grounded;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();   
+        groundChecker = groundCheckerObject.GetComponent<GeoChecker>();
+        frontChecker = frontCheckerObject.GetComponent<GeoChecker>();
     }
 
     void Update()
     {
-        // currentSpeed = 
-        
-        
-        rotateSum = 0;
-        GetRotateAmount();        
+        GetStates();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        rotateSum = 0;
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject bulletObject;
             Bullet bullet;
@@ -33,19 +78,57 @@ public class Player : MonoBehaviour
             bullet.sourceObject = gameObject; 
             bullet.sourceObjectController = characterController;                   
         }
+        
+        #region Gravity
 
-        characterController.transform.Rotate(0, rotateSum, 0);   
-        // Vector3 move = new Vector3(0, 0, Input.GetAxis("Vertical"));
-        // move = new Vector3(move.x * transform.forward.x, move.y * transform.forward.y, move.z * transform.forward.z);        
+        downSpeed = characterController.velocity.y;
+        downMove += downSpeed + gravityStrength;
 
+        if (groundChecker.isTouching)
+        {
+            downMove = 0;
+        }
+
+        characterController.Move(new Vector3(0f, downMove, 0f) * Time.deltaTime);
+
+        #endregion
+
+        #region Rotation
+      
+        if (turningLeft)
+        {
+            rotateSum -= maxRotateAmount;
+        }
+
+        if (turningRight)
+        {
+            rotateSum += maxRotateAmount;
+        }
+
+        if (turning)
+        {
+            lostToGripRate = turningLostToGripRate;
+        }
+        else
+        {
+            lostToGripRate = normalLostToGripRate;
+        }
+
+
+        characterController.transform.Rotate(0, rotateSum, 0);
+
+        #endregion
+
+        #region Back + forth
+        
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
             if (moveSpeed < targetForwardSpeed)
-            {
+            {                
                 moveSpeed += acceleration;
             }
             else
-            {
+            {                
                 moveSpeed = targetForwardSpeed;
             }
         }
@@ -53,11 +136,11 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
         {
             if (moveSpeed > targetBackwardSpeed)
-            {
-                moveSpeed -= deceleration;
+            {         
+                moveSpeed -= deceleration;         
             }
-            else
-            {
+            else 
+            {                
                 moveSpeed = targetBackwardSpeed;
             }
         }
@@ -74,16 +157,66 @@ public class Player : MonoBehaviour
             }
         }
 
-        currentSpeed = characterController.velocity.z;
+        if (frontChecker.firstFrameTouching)
+        {
+            moveSpeed = 0;
+        }
+
+        if (frontChecker.isTouching)
+        {
+            targetForwardSpeed = lowerTargetForwardSpeed;
+        }
+        else
+        {
+            targetForwardSpeed = normalTargetForwardSpeed;
+        }
+
+        #endregion
 
         characterController.Move(transform.forward * moveSpeed * Time.deltaTime);
 
-        // moveSpeed = currentSpeed;
+        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.isTouching)
+        {
+            characterController.Move(new Vector3(0f, Mathf.Sqrt(jumpHeight * -2f * gravityStrength), 0f));
+        }
+    }
 
-        // if (currentSpeed.Absolute_() < moveSpeed.Absolute_())
-        // {
-        //     moveSpeed = currentSpeed;
-        // }
+    void GetStates()
+    {        
+        if (Input.GetKey(KeyCode.A))
+        {
+            turningLeft = true;
+        }
+        else
+        {
+            turningLeft = false;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            turningRight = true;
+        }
+        else
+        {
+            turningRight = false;
+        }
+
+        if (turningLeft || turningRight)
+        {
+            turning = true;
+        }
+        else
+        {
+            turning = false;
+        }
+
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        {
+            turning = false;
+            turningLeft = false;
+            turningRight = false;
+        }
+
     }
 
     void GetRotateAmount()
