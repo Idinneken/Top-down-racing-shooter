@@ -112,11 +112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c06f879e2c950747938b0026adf52d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  explosionPrefab: {fileID: 293457161193274754, guid: 4f35af1c890ee914c86d4c0b2dbd39b3, type: 3}
+  movesThroughComponent: LetsProjectilesPassThrough
   damage: 0
   speed: 80
+  decayTime: 5
 --- !u!54 &1636231149636034131
 Rigidbody:
   m_ObjectHideFlags: 0

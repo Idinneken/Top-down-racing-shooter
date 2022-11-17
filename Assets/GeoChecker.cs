@@ -1,6 +1,5 @@
 using UnityEngine;
 using Extensions;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 public class GeoChecker : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class GeoChecker : MonoBehaviour
     public bool isTouching = false;
     public bool previousFrameIsTouching = false;
     public bool firstFrameTouching = false;
-    public LayerMask groundLayer;
+    public string componentThatIsCheckedFor;
 
     public bool checking = true;
 
@@ -31,8 +30,27 @@ public class GeoChecker : MonoBehaviour
     }    
 
     public bool CheckTick()
-    {                
-        return Physics.CheckSphere(shape.transform.position, shape.radius, groundLayer);
+    {
+        Collider[] collidersOverlappingChecker = Physics.OverlapSphere(shape.transform.position, shape.radius);
+
+        if (collidersOverlappingChecker == null)
+        {
+            return false;
+        }
+        else
+        {
+            foreach(Collider collider in collidersOverlappingChecker)
+            {
+                if (collider.gameObject.GetComponent(componentThatIsCheckedFor))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+        //return Physics.CheckSphere(shape.transform.position, shape.radius, checkLayer);
     }
 
     public void EnableChecker()
