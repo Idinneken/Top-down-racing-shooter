@@ -32,9 +32,16 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {        
         if (GetComponent(movesThroughComponent) == null && collider.gameObject != sourceObject)
-        {            
+        {                        
             this.InstantiatePrefabAndGetComponent(explosionPrefab, out explosionObject, out explosion);
             explosionObject.transform.position = transform.position;
+            
+            if (collider.gameObject.GetComponent<AffectedByBullets>()?.DestroyOnHit == true)
+            {
+                Destroy(collider.gameObject);
+            }
+
+
             Destroy(gameObject);
         }        
     }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using Extensions;
-using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -121,12 +120,12 @@ public class Player : MonoBehaviour
       
         if (turningLeft)
         {
-            rotateSum -= maxRotateAmount;
+            rotateSum -= maxRotateAmount * Time.deltaTime;
         }
 
         if (turningRight)
         {
-            rotateSum += maxRotateAmount;
+            rotateSum += maxRotateAmount * Time.deltaTime;
         }
 
         if (turning)
@@ -241,6 +240,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && groundChecker.isTouching)
         {
+            characterController.Move(new Vector3(0, -characterController.velocity.y, 0));
+            
             characterController.Move(new Vector3(0f, Mathf.Sqrt(jumpHeight * -2f * gravityStrength), 0f));
         }
 
