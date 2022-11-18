@@ -15,7 +15,7 @@ public class KillZone : MonoBehaviour
         if (collider.gameObject.GetComponent<Stats>() != null && damageOnEnter)
         {
             print("here");
-            collider.gameObject.GetComponent<Stats>().health.ChangeValue(-damage);
+            collider.gameObject.GetComponent<Stats>().stats["health"].ChangeValue(-damage);
         }
         
         if (collider.gameObject.GetComponent<Stats>() != null && killOnEnter)
@@ -33,7 +33,7 @@ public class KillZone : MonoBehaviour
     {
         if (collider.gameObject.GetComponent<Stats>() != null && damageOnExit)
         {
-            collider.gameObject.GetComponent<Stats>().health.ChangeValue(-damage);
+            collider.gameObject.GetComponent<Stats>().stats["health"].ChangeValue(-damage);
         }
 
         if (collider.gameObject.GetComponent<Stats>() != null && killOnExit)

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Extensions;
+using UnityEditor.Build.Content;
 
 public class Player : MonoBehaviour
 {
@@ -97,9 +98,11 @@ public class Player : MonoBehaviour
             GameObject bulletObject;
             Bullet bullet;
             this.InstantiatePrefabAndGetComponent(bulletPrefab, out bulletObject, out bullet);
+            bullet.sourceObject = gameObject;
+            
+
             bulletObject.transform.position = bulletSource.position;
-            bullet.sourceObject = gameObject; 
-            bullet.sourceObjectController = characterController;                   
+            bulletObject.transform.forward = transform.forward;
         }
         
         #region Gravity

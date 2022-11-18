@@ -2,27 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
+using Unity.VisualScripting.FullSerializer;
 
 public class Stats : MonoBehaviour
 {
-    public Stat health = new(100, 0, 100, false, true);
-    public Stat points = new(0, 0, 0, true, false);
-    public Stat lives = new(3, 0, 5, false, true);
+    public Dictionary<string, Stat> stats = new();
+
+    //public Stat health = new(100, 0, 100, false, true);
+    //public Stat points = new(0, 0, 0, true, false);
+    //public Stat lives = new(3, 0, 5, false, true);
 
     public Transform resetPoint;
     
-    public void CheckStats()
+    public void Start()
     {
-        if (health.value < health.minValue)
+        stats.Add("health", new(this, 100, 0, 100, false, true));
+        stats.Add("points", new(this, 0, 0, 0, true, false));
+        stats.Add("lives", new(this, 3, 0, 5, false, true));
+    }
+
+    public bool HasStat(string statName)
+    {
+        return stats.ContainsKey(statName);
+    }
+
+    public void Die()
+    {
+        stats["lives"].ChangeValue(-1);
+        ResetPosition();
+    }
+
+    public void CheckStats()
+    {        
+        if (stats["health"].belowMin)
         {
             Die();
         }
 
-        if (lives.value < lives.minValue)
+        if (stats["lives"].belowMin)
         {
             GameOver();
         }
-
     }
 
     public void ResetPosition()
@@ -33,20 +53,6 @@ public class Stats : MonoBehaviour
         GetComponent<Player>().moveSpeed = 0;
     }
 
-    public void Die()
-    {
-        lives.ChangeValue(-1);
-        
-        if (lives.value < lives.minValue)
-        {
-            GameOver();
-        }
-        else
-        {
-            ResetPosition();
-        }
-    }
-
     public void GameOver()
     {
         print("Game Over");
@@ -55,30 +61,31 @@ public class Stats : MonoBehaviour
 
 public class Stat
 {
+    Stats stats;
+
     public int value;
-    public readonly int startValue, minValue, maxValue;
-    public bool clampMinValue, clampMaxValue;
+    public readonly int startValue;
+    public int minValue = 0, maxValue = 0;
+    public bool clampMinValue = false, clampMaxValue = false;
     public bool belowMin = false, aboveMax = false;    
 
-    public Stat(int startValue_)
+    public Stat(Stats stats_, int startValue_)
     {
-        startValue = startValue_;
-        minValue = default;
-        maxValue = default;
-        clampMinValue = false;
-        clampMaxValue = false;
+        stats = stats_;
 
+        startValue = startValue_;        
         value = startValue;
     }
 
-    public Stat(int startValue_, int minValue_, int maxValue_, bool clampMinValue_, bool clampMaxValue_)
+    public Stat(Stats stats_, int startValue_, int minValue_, int maxValue_, bool clampMinValue_, bool clampMaxValue_)
     {
+        stats = stats_;
+
         startValue = startValue_;
         minValue = minValue_;
         maxValue = maxValue_;
         clampMinValue = clampMinValue_;
         clampMaxValue = clampMaxValue_;
-
         value = startValue;
     }
 
@@ -114,12 +121,14 @@ public class Stat
         {
             belowMin = true;
 
-            if (clampMaxValue)
+            if (clampMinValue)
             {
                 value = minValue; 
                 belowMin = false;
             }
-        }   
+        }        
+
+        stats.CheckStats();
     }
 
 }
