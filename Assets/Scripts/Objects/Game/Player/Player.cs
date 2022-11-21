@@ -3,6 +3,10 @@ using Extensions;
 
 public class Player : MonoBehaviour
 {
+    public LayerMask groundLayer;
+
+    public Transform raycastSource;
+    
     public GameObject bulletPrefab;
     public Transform bulletSource;
 
@@ -217,14 +221,14 @@ public class Player : MonoBehaviour
 
         moveSum = transform.forward * moveSpeed;
 
-        if (moveSpeed < 0.05 && moving == false)
+        if (moveSpeed < 0.5 && moving == false)
         {
             moveSpeed = 0;
         }
 
         // print(moveSpeed);
 
-        characterController.Move(moveSum * Time.deltaTime);
+        characterController.Move(AdjustVelocityToSlope(moveSum * Time.deltaTime));
 
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
@@ -416,38 +420,58 @@ public class Player : MonoBehaviour
     }
     
     void GetRotateAmount()
+    {
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) || !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
-            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) || !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+            rotateSum = 0;
+            return;
+        }
+
+        if (moveSpeed >= 0)
+        {
+            if (Input.GetKey(KeyCode.A))
             {
-                rotateSum = 0;
-                return;
+                rotateSum -= maxRotateAmount;
             }
 
-            if (moveSpeed >= 0)
+            if (Input.GetKey(KeyCode.D))
             {
-                if (Input.GetKey(KeyCode.A))
-                {
-                    rotateSum -= maxRotateAmount;
-                }
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    rotateSum += maxRotateAmount;
-                }
+                rotateSum += maxRotateAmount;
             }
-            else if (moveSpeed < 0)
+        }
+        else if (moveSpeed < 0)
+        {
+            if (Input.GetKey(KeyCode.A))
             {
-                if (Input.GetKey(KeyCode.A))
-                {
-                    rotateSum += maxRotateAmount;
-                }
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    rotateSum -= maxRotateAmount;
-                }
+                rotateSum += maxRotateAmount;
             }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                rotateSum -= maxRotateAmount;
+            }
+        }
 
             
+    }
+
+    private Vector3 AdjustVelocityToSlope(Vector3 velocity_)
+    {
+        var ray = new Ray(raycastSource.position, Vector3.down); //Cast a ray to the floor
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.2f) && hit.collider.gameObject.IsOnLayer_(groundLayer)) //If the ray hits
+        {
+            print(hit.collider.gameObject.name);
+
+            var slopeRotation = Quaternion.FromToRotation(Vector3.up, hit.normal); //Get the rotation of the slope             
+            var adjustedVelocity = slopeRotation * velocity_; //Adjusted velocity = Rotation of the slope * the velocity
+            if (adjustedVelocity.y < 0) //If the y of the velocity is less than 0 (if going down the slope)
+            {
+                // print(adjustedVelocity);
+                return adjustedVelocity; //Return the calculated velocity
+            }
         }
+        return velocity_; //Otherwise, return the velocity already given
+    }
+
 }
