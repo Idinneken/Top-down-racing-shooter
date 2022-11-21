@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8670621281109909099}
   - component: {fileID: 8670621281109909109}
-  - component: {fileID: 8670621281109909110}
+  - component: {fileID: 8106529993225335301}
+  - component: {fileID: 1884402586065576869}
+  - component: {fileID: 8450263316877752256}
+  - component: {fileID: 3673536162032996700}
   m_Layer: 0
   m_Name: GeoChecker
   m_TagString: Untagged
@@ -31,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8670621281109909109
 MonoBehaviour:
@@ -45,13 +48,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090b98e4333a1374389ee6d284053cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 8670621281109909110}
+  checkLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  touchedObjects: []
   isTouching: 0
   previousFrameIsTouching: 0
   firstFrameTouching: 0
-  componentThatIsCheckedFor: StopsPlayer
   checking: 1
---- !u!114 &8670621281109909110
+--- !u!54 &8106529993225335301
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8670621281109909098}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!33 &1884402586065576869
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8670621281109909098}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &8450263316877752256
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8670621281109909098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3673536162032996700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,9 +103,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8670621281109909098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f584e75a6759b9643866e2bae133f55d, type: 3}
+  m_Script: {fileID: 11500000, guid: ee7e1e8096d6ba746a14b26260da9b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.5
-  color: {r: 1, g: 1, b: 1, a: 1}
-  wireFrame: 0
+  mesh: {fileID: 1884402586065576869}
+  selectedColor: {r: 0.75, g: 0.75, b: 0.75, a: 0.75}
+  unSelectedColor: {r: 0.25, g: 0.25, b: 0.25, a: 0.125}
+  draw: 1
+  alwaysDraw: 1
+  solidOnSelect: 1

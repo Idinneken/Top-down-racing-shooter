@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 700566165853260297}
   - component: {fileID: 700566165853260298}
   - component: {fileID: 700566165853260302}
-  - component: {fileID: 700566165853260299}
   - component: {fileID: 5594285946634709317}
   - component: {fileID: 5442576884222738385}
+  - component: {fileID: 2717244037689239788}
   m_Layer: 0
   m_Name: Hurt Trigger
   m_TagString: Untagged
@@ -160,24 +160,6 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
---- !u!114 &700566165853260299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700566165853260340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ef8b03e8054ea40a10f92fdd509a3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mesh: {fileID: 700566165853260296}
-  selectedColor: {r: 0.75, g: 0.75, b: 0.75, a: 0.7490196}
-  unSelectedColor: {r: 0.25, g: 0.25, b: 0.25, a: 0.1254902}
-  draw: 1
-  alwaysDraw: 1
-  solidOnSelect: 0
 --- !u!114 &5594285946634709317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,3 +188,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2717244037689239788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700566165853260340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7e1e8096d6ba746a14b26260da9b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mesh: {fileID: 700566165853260296}
+  selectedColor: {r: 0.75, g: 0.75, b: 0.75, a: 0.75}
+  unSelectedColor: {r: 0.25, g: 0.25, b: 0.25, a: 0.125}
+  draw: 1
+  alwaysDraw: 1
+  solidOnSelect: 0

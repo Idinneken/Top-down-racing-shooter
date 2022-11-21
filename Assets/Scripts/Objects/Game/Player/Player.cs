@@ -1,6 +1,5 @@
 using UnityEngine;
 using Extensions;
-using UnityEditor.Build.Content;
 
 public class Player : MonoBehaviour
 {
@@ -20,8 +19,8 @@ public class Player : MonoBehaviour
 
     [Header("Gravity")]
     public float gravityStrength;
-    public float downSpeed;
-    public float downMove;
+    public float verticalSpeed;
+    public float verticalMove;
 
     [Space]
     [Header("Movement")]
@@ -32,6 +31,8 @@ public class Player : MonoBehaviour
     public float turningLostToGripRate;
     public float normalLostToGripRate;
     public float lostToGripRate;
+    public float inAirModifier;
+
     [Space]
     public float movingForwardTargetSpeed;
     public float normalMovingForwardTargetSpeed;
@@ -73,6 +74,8 @@ public class Player : MonoBehaviour
     public bool travelling;
     public bool residualTravelling;
 
+    Vector3 moveSum;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();   
@@ -105,19 +108,6 @@ public class Player : MonoBehaviour
             bulletObject.transform.forward = transform.forward;
         }
         
-        #region Gravity
-
-        downSpeed = characterController.velocity.y;
-        downMove += downSpeed + gravityStrength;
-
-        if (groundChecker.isTouching)
-        {
-            downMove = 0;
-        }
-
-        characterController.Move(new Vector3(0f, downMove, 0f) * Time.deltaTime);
-
-        #endregion
 
         #region Rotation
       
@@ -182,7 +172,7 @@ public class Player : MonoBehaviour
             {
                 moveSpeed -= lostToGripRate;
             }
-            else if (currentSpeed < 0)
+            else if (moveSpeed < 0)
             {
                 moveSpeed += lostToGripRate;
             }
@@ -212,8 +202,7 @@ public class Player : MonoBehaviour
         }
 
         #endregion
-
-
+        
         #region last minute checks
 
         if (moveSpeed > maxSpeed)
@@ -225,30 +214,99 @@ public class Player : MonoBehaviour
         {
             moveSpeed = maxNegativeSpeed;
         }
-       
-        Vector3 moveSum = transform.forward * moveSpeed * Time.deltaTime;
 
-        if (moveSum.magnitude < 0.05 && moving == false)
+        moveSum = transform.forward * moveSpeed;
+
+        if (moveSpeed < 0.05 && moving == false)
         {
             moveSpeed = 0;
         }
 
-        characterController.Move(moveSum);
+        // print(moveSpeed);
+
+        characterController.Move(moveSum * Time.deltaTime);
 
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
         #endregion
 
-        #region Jumping
+        Gravity();
 
-        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.isTouching)
-        {
-            characterController.Move(new Vector3(0, -characterController.velocity.y, 0));
-            
-            characterController.Move(new Vector3(0f, Mathf.Sqrt(jumpHeight * -2f * gravityStrength), 0f));
-        }
+        if (groundChecker.isTouching && Input.GetKeyDown(KeyCode.Space))
+        {            
+            verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravityStrength);                         
+        } 
 
+        // if (groundChecker.isTouching)
+        // {
+        //    print("touching the ground"); 
+        // }
+
+        
+
+        
+
+
+        #region Gravity
+
+        
+
+        // verticalSpeed = characterController.velocity.y;
+        // // verticalMove = (verticalMove + gravityStrength) * Time.deltaTime;
+        // verticalMove += verticalSpeed + gravityStrength;
+
+        // if (groundChecker.isTouching)
+        // {
+        //     verticalMove = 0;
+        // }
+        
+        // #endregion
+
+        // #region Jumping
+
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     print("should be jumping");
+        // }
+
+        // if (Input.GetKeyDown(KeyCode.Space) && groundChecker.isTouching)
+        // {
+        //     verticalMove = 10f; 
+        // }
+        
+        #region clarity
+        
+        // if (Input.GetKeyDown(KeyCode.Space) && groundChecker.previousFrameIsTouching)
+        // {
+        //     // characterController.Move(new Vector3(0, -characterController.velocity.y, 0));
+        //     print("is jumping");
+        //     // print(Mathf.Sqrt(jumpHeight * -2f * gravityStrength) + -characterController.velocity.y);
+        //     // characterController.Move(new Vector3(0,0,0));
+        //     print(characterController.velocity);
+        //     // characterController.Move(new Vector3(0f,Mathf.Sqrt(jumpHeight * -2f * gravityStrength), 0f));
+        //     print(characterController.velocity);
+        //     groundChecker.isTouching = false;
+        //     groundChecker.DisableCheckerFor(0.02f);
+        // }
+
+        // // characterController.Move(new Vector3(0, verticalMove, 0));
+
+        #endregion        
+        
         #endregion
+    }
+
+    
+
+    private void Gravity()
+    {
+        verticalSpeed += gravityStrength * Time.deltaTime;                
+        characterController.Move(new Vector3(0, verticalSpeed * Time.deltaTime, 0));
+        
+        if (characterController.isGrounded)
+        {      
+            verticalSpeed = 0;
+        }
     }
 
     void GetStates()
@@ -327,8 +385,16 @@ public class Player : MonoBehaviour
             movingForward = false;
         }
 
-        if (Mathf.Round(new Vector3(characterController.velocity.x, characterController.velocity.z).magnitude) > 0)
+        // print(moveSum);
+        // print(characterController.velocity);
+        // print(characterController.velocity.magnitude);
+
+        // print("characterController.velocity.magnitude: " + characterController.velocity.magnitude + "Mathf.Round(new Vector3(characterController.velocity.x, characterController.velocity.z).magnitude) > 0: " + (Mathf.Round(new Vector3(characterController.velocity.x, characterController.velocity.z).magnitude) > 0));
+
+        if (Mathf.Round(moveSum.magnitude) > 0)
         {
+            print("travelling");
+
             travelling = true;
         }
         else
@@ -382,55 +448,6 @@ public class Player : MonoBehaviour
                 }
             }
 
-            // if (currentSpeed > maxRotateForwardSpeed)
-            // {
-            //     print("currentSpeed > maxRotateForwardSpeed");
-
-            //     if (Input.GetKey(KeyCode.D))
-            //     {
-            //         rotateSum += maxRotateAmount;
-            //     }
-
-            //     if (Input.GetKey(KeyCode.A))
-            //     {
-            //         rotateSum -= maxRotateAmount;
-            //     }
-            // }
-
-            // if (currentSpeed <= maxRotateForwardSpeed && currentSpeed >= minRotateForwardSpeed)
-            // {
-            //     print("currentSpeed <= maxRotateForwardSpeed && currentSpeed >= minRotateForwardSpeed");
-
-            //     float deltaRotateForwardSpeed = maxRotateForwardSpeed - minRotateForwardSpeed; //16-4 = 8
-            //     float deltaForwardSpeed = maxRotateForwardSpeed - currentSpeed; //16-12 = 4
-            //     float deltaRotateAmount = maxRotateAmount - minRotateAmount; //0.6-0.2 = 0.4
-
-            //     // (4/8 * 0.4) = 0.2. 0.2 + minRotateAmount = 0.4
-
-            //     if (Input.GetKey(KeyCode.D))
-            //     {
-            //         rotateSum += (deltaForwardSpeed / deltaRotateForwardSpeed) + minRotateAmount;
-            //     }
-
-            //     if (Input.GetKey(KeyCode.A))
-            //     {
-            //         rotateSum -= (deltaForwardSpeed / deltaRotateForwardSpeed) + minRotateAmount;
-            //     }
-            // }
-
-            // if (currentSpeed > minRotateForwardSpeed && currentSpeed > 0)
-            // {
-            //     print("currentSpeed > minRotateForwardSpeed && currentSpeed > 0");
-
-            //     if (Input.GetKey(KeyCode.D))
-            //     {
-            //         rotateSum += minRotateAmount;
-            //     }
-
-            //     if (Input.GetKey(KeyCode.A))
-            //     {
-            //         rotateSum -= minRotateAmount;
-            //     }
-            // }
+            
         }
 }

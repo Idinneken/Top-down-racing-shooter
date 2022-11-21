@@ -132,6 +132,13 @@ namespace Extensions
             controller_.enabled = true;
         }
 
+        public static void ChangePos_(this MonoBehaviour monoBehaviour_, CharacterController controller_, Vector3 position_)
+        {
+            controller_.enabled = false;
+            controller_.transform.position = position_;
+            controller_.enabled = true;
+        }
+
         public static Vector3 Absolute_(this Vector3 vector_)
         {
             return new Vector3(Mathf.Abs(vector_.x), Mathf.Abs(vector_.y), Mathf.Abs(vector_.z) );

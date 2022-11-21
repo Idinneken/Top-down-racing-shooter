@@ -172,10 +172,10 @@ GameObject:
   - component: {fileID: 8380574808109872781}
   - component: {fileID: 8380574808109872777}
   - component: {fileID: 8380574808109872776}
-  - component: {fileID: 8380574808109872779}
   - component: {fileID: 8380574808109872778}
   - component: {fileID: 8380574808109872790}
   - component: {fileID: 1505502229357273511}
+  - component: {fileID: 7338549545332972961}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -220,24 +220,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 2147483647
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &8380574808109872779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8380574808109872780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ef8b03e8054ea40a10f92fdd509a3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mesh: {fileID: 8380574808109872777}
-  selectedColor: {r: 0.75, g: 0.75, b: 0.75, a: 0.7490196}
-  unSelectedColor: {r: 0.25, g: 0.25, b: 0.25, a: 0.1254902}
-  draw: 1
-  alwaysDraw: 1
-  solidOnSelect: 0
 --- !u!114 &8380574808109872778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,3 +261,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e27d123fe5c57a4a8db939f0c13d379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7338549545332972961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8380574808109872780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7e1e8096d6ba746a14b26260da9b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mesh: {fileID: 8380574808109872777}
+  selectedColor: {r: 0.75, g: 0.75, b: 0.75, a: 0.75}
+  unSelectedColor: {r: 0.25, g: 0.25, b: 0.25, a: 0.125}
+  draw: 1
+  alwaysDraw: 1
+  solidOnSelect: 0

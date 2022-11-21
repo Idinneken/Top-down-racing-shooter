@@ -3,8 +3,8 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     public float radius = 5.0F;
-    public float power = 10.0F;
-    public string affectsThisCompont;
+    public float power = 10.0F;    
+    public float upwardsModifier = 2.0F;
 
     void Start()
     {
@@ -14,9 +14,9 @@ public class Explosion : MonoBehaviour
         {
             Rigidbody rb;
 
-            if (hit.TryGetComponent(out rb) && hit.gameObject.GetComponent(affectsThisCompont) != null)
+            if (hit.TryGetComponent(out rb) && hit.gameObject.GetComponent<AffectedByExplosions>() != null)
             {
-                rb.AddExplosionForce(power, explosionPos, radius, 3.0F);
+                rb.AddExplosionForce(power, explosionPos, radius, upwardsModifier);
             }
         }
 
