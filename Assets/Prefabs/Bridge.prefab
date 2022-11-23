@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 762413370341624102}
   - component: {fileID: 3400410648296789646}
   - component: {fileID: 4720883305904939765}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Section 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7983484826169117257}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ Transform:
   - {fileID: 8250933470906901958}
   - {fileID: 1301629488203369213}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6945833799547044816
 GameObject:
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 5841079105051594317}
   - component: {fileID: 857319530691862033}
   - component: {fileID: 663349127523187465}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Section 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 8410280951031042360}
   - component: {fileID: 6388551871832923026}
   - component: {fileID: 1996431867572284203}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Seciton 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -33,7 +33,9 @@ public class Stats : MonoBehaviour
     }
 
     public void CheckStats()
-    {        
+    {
+        print(stats["points"].value);
+
         if (stats["health"].belowMin)
         {
             Die();
@@ -92,6 +94,7 @@ public class Stat
     public void ChangeValue(int amount_)
     {
         value += amount_;
+        Debug.Log("yuh");
         CheckValue();        
     }
 

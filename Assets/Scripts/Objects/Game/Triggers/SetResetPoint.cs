@@ -30,6 +30,7 @@ public class SetResetPoint : MonoBehaviour
 
     public void SetStatResetPoint(Stats stats_)
     {
+        resetTransform.SetParent(null, true);
         stats_.resetPoint = resetTransform;
     }
 }

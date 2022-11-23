@@ -107,7 +107,6 @@ public class Player : MonoBehaviour
             this.InstantiatePrefabAndGetComponent(bulletPrefab, out bulletObject, out bullet);
             bullet.sourceObject = gameObject;
             
-
             bulletObject.transform.position = bulletSource.position;
             bulletObject.transform.forward = transform.forward;
         }
@@ -397,8 +396,6 @@ public class Player : MonoBehaviour
 
         if (Mathf.Round(moveSum.magnitude) > 0)
         {
-            print("travelling");
-
             travelling = true;
         }
         else

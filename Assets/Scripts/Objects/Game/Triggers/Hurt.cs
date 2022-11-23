@@ -4,10 +4,7 @@ public class Hurt : MonoBehaviour
 {
     public bool damage;
     public bool kill;
-    public int damageAmount;
-    // public int lifeLostNumber;
-
-    public Transform resetPoint;
+    public int damageAmount;        
 
     public void OnTriggerEnter(Collider other)
     {
@@ -15,9 +12,9 @@ public class Hurt : MonoBehaviour
         {
             if (other.gameObject.GetComponent<Stats>() != null)
             {
-                if (resetPoint != null)
+                if (GetComponent<SetResetPoint>() != null)
                 {
-                    other.gameObject.GetComponent<Stats>().resetPoint = resetPoint;
+                    other.gameObject.GetComponent<Stats>().resetPoint = GetComponent<SetResetPoint>().resetTransform;
                 }    
 
                 if (damage)
@@ -35,14 +32,14 @@ public class Hurt : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<InvokesTriggers>() != null && gameObject.GetComponent<Trigger>() != null && gameObject.GetComponent<Trigger>().triggerOnEnter && GetComponent<Trigger>().requiredInvokerTags.Contains(other.gameObject.GetComponent<InvokesTriggers>().triggerTag))
+        if (other.gameObject.GetComponent<InvokesTriggers>() != null && gameObject.GetComponent<Trigger>() != null && gameObject.GetComponent<Trigger>().triggerOnExit && GetComponent<Trigger>().requiredInvokerTags.Contains(other.gameObject.GetComponent<InvokesTriggers>().triggerTag))
         {
             if (other.gameObject.GetComponent<Stats>() != null)
             {
-                if (resetPoint != null)
+                if (GetComponent<SetResetPoint>() != null)
                 {
-                    other.gameObject.GetComponent<Stats>().resetPoint = resetPoint;
-                }    
+                    other.gameObject.GetComponent<Stats>().resetPoint = GetComponent<SetResetPoint>().resetTransform;
+                }
 
                 if (damage)
                 {
