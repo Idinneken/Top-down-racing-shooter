@@ -461,7 +461,7 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 0.2f) && hit.collider.gameObject.IsOnLayer_(groundLayer)) //If the ray hits
         {
-            print(hit.collider.gameObject.name);
+            //print(hit.collider.gameObject.name);
 
             var slopeRotation = Quaternion.FromToRotation(Vector3.up, hit.normal); //Get the rotation of the slope             
             var adjustedVelocity = slopeRotation * velocity_; //Adjusted velocity = Rotation of the slope * the velocity
