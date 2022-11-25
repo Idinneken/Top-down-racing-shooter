@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Extensions;
 using UnityEditor;
-using Unity.VisualScripting;
 
 [ExecuteInEditMode]
 public class Biome : MonoBehaviour

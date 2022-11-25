@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 700566165853260340, guid: 6f0fcc98be12d6d41b182839089d8d25, type: 3}
       propertyPath: m_Name
-      value: Hurt Trigger NoResetPoint
+      value: Hurt Trigger No Setting ResetPoint
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7614357899564255820, guid: 6f0fcc98be12d6d41b182839089d8d25, type: 3}
