@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6671078672652658456
+--- !u!1001 &7358026211619121876
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5590063711569736686, guid: 7e6359e9579669f4aa7ce7b74b14811f, type: 3}
+      propertyPath: value
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 8380574807796536512, guid: 7e6359e9579669f4aa7ce7b74b14811f, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8380574807796536512, guid: 7e6359e9579669f4aa7ce7b74b14811f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54,8 +58,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8380574807796536516, guid: 7e6359e9579669f4aa7ce7b74b14811f, type: 3}
       propertyPath: m_Name
-      value: Big Coin 1
+      value: Blue Coin
       objectReference: {fileID: 0}
+    - target: {fileID: 8380574807831130368, guid: 7e6359e9579669f4aa7ce7b74b14811f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1cf8bba805abd204f90bccfce5368485, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e6359e9579669f4aa7ce7b74b14811f, type: 3}

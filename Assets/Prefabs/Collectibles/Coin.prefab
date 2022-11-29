@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statName: points
-  value: 100
+  value: 50
 --- !u!114 &1505502229357273511
 MonoBehaviour:
   m_ObjectHideFlags: 0

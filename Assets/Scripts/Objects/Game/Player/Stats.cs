@@ -94,7 +94,6 @@ public class Stat
     public void ChangeValue(int amount_)
     {
         value += amount_;
-        Debug.Log("yuh");
         CheckValue();        
     }
 

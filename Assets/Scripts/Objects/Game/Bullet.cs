@@ -51,10 +51,21 @@ public class Bullet : MonoBehaviour
                 sourceObject.GetComponent<Stats>().stats[collider.gameObject.GetComponent<AffectsStat>().statName].ChangeValue(collider.gameObject.GetComponent<AffectsStat>().value);
             }
 
+            if (collider.gameObject.GetComponent<ExplodeOnHitByBullets>() != null)
+            {
+                collider.gameObject.GetComponent<ExplodeOnHitByBullets>().Explode();
+            }
+
+            if (collider.gameObject.GetComponent<AffectStatOnHitByBullets>() != null && collider.gameObject.GetComponent<AffectsStat>() != null && sourceObject.GetComponent<Stats>() != null)
+            {
+                sourceObject.GetComponent<Stats>().stats[collider.gameObject.GetComponent<AffectsStat>().statName].ChangeValue(collider.gameObject.GetComponent<AffectsStat>().value);
+            }
+
             if (collider.gameObject.GetComponent<DestroyedByBullets>() != null)
             {
                 Destroy(collider.gameObject);
             }
+
 
             // print("SourceObject: " + sourceObject.name);
             // print("hit object: " + collider.gameObject.name);
