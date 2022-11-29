@@ -196,8 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ebc7470163b9c4e9a97c222c60f1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredInvokerTags:
-  - CollectsItems
+  requiredInvokerTag: collectsItems
   triggerOnEnter: 1
   triggerOnStay: 0
   triggerOnExit: 0

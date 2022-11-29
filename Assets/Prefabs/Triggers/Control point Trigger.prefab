@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ebc7470163b9c4e9a97c222c60f1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredInvokerTags: []
+  requiredInvokerTag: player
   triggerOnEnter: 1
   triggerOnStay: 0
   triggerOnExit: 0
@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9d658e1643f7d4eb6e81404639c85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelObject: {fileID: 0}
 --- !u!114 &-3059964103927324657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615408f650d3497428789405da6d3d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToDestroy: {fileID: 0}
+  requiredComponentName: 
 --- !u!114 &1125312528575609388
 MonoBehaviour:
   m_ObjectHideFlags: 0
