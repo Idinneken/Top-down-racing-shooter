@@ -3,6 +3,6 @@ using System.Collections.Generic;
 
 public class Trigger : MonoBehaviour
 {
-    public List<string> requiredInvokerTags;
+    public string requiredInvokerTag;
     public bool triggerOnEnter, triggerOnStay, triggerOnExit;
 }
