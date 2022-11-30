@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6730824326663017762}
   - component: {fileID: 477140087657824443}
   - component: {fileID: 9034419148304253097}
+  - component: {fileID: 2104481081543183523}
   m_Layer: 0
   m_Name: Explosive Barrel
   m_TagString: Untagged
@@ -196,3 +197,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d8219278728d44193a3778016a6ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2104481081543183523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6195415310590671706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1573b6a1197ae99479d54acab8957e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentName: BARRELS
+  set: 1

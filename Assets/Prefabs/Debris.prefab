@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2315206524881475273}
   - component: {fileID: 2315206524881475266}
   - component: {fileID: 2315206524881475267}
+  - component: {fileID: 5931226171075305814}
   m_Layer: 3
   m_Name: Debris
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -43.522, z: 0}
 --- !u!33 &2315206524881475276
 MeshFilter:
@@ -140,3 +141,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb93e4965c290cb448ee49b0c96047dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5931226171075305814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2315206524881475272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1573b6a1197ae99479d54acab8957e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentName: DEBRIS
+  set: 1

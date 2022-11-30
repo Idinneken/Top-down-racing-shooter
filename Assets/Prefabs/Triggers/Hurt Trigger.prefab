@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 700566165853260302}
   - component: {fileID: 2717244037689239788}
   - component: {fileID: -7614357899564255820}
+  - component: {fileID: 1769992025754737919}
   m_Layer: 0
   m_Name: Hurt Trigger
   m_TagString: Untagged
@@ -234,6 +235,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resetTransform: {fileID: 0}
+--- !u!114 &1769992025754737919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700566165853260340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1573b6a1197ae99479d54acab8957e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentName: HURT TRIGGERS
+  set: 1
 --- !u!1 &4305811017302334209
 GameObject:
   m_ObjectHideFlags: 0
