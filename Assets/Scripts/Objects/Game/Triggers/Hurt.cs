@@ -14,7 +14,7 @@ public class Hurt : MonoBehaviour
             {
                 if (GetComponent<SetResetPoint>() != null)
                 {
-                    other.gameObject.GetComponent<Stats>().resetPoint = GetComponent<SetResetPoint>().resetTransform;
+                    other.gameObject.GetComponent<Stats>().initialResetPoint = GetComponent<SetResetPoint>().resetTransform;
                 }    
 
                 if (damage)
@@ -38,7 +38,7 @@ public class Hurt : MonoBehaviour
             {
                 if (GetComponent<SetResetPoint>() != null)
                 {
-                    other.gameObject.GetComponent<Stats>().resetPoint = GetComponent<SetResetPoint>().resetTransform;
+                    other.gameObject.GetComponent<Stats>().initialResetPoint = GetComponent<SetResetPoint>().resetTransform;
                 }
 
                 if (damage)

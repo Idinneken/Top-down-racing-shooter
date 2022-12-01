@@ -15,7 +15,7 @@ public class Timer : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!paused)
         {
@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
         }
     }
 
-    private void StartTimer()
+    public void StartTimer()
     {
         referencePoint = Time.fixedTime;
         paused = false;

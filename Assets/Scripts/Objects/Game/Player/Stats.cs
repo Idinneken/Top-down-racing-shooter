@@ -1,24 +1,38 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
-using Unity.VisualScripting.FullSerializer;
+using System;
 
 public class Stats : MonoBehaviour
 {
-    public Dictionary<string, Stat> stats = new();
+    internal Timer timer;
 
-    //public Stat health = new(100, 0, 100, false, true);
-    //public Stat points = new(0, 0, 0, true, false);
-    //public Stat lives = new(3, 0, 5, false, true);
+    public GameObject pointsTextObject, livesTextObject, timeTextObject;
+    internal TextElement pointsText, livesText, timeText;    
+    
+    public Dictionary<string, Stat> stats = new();    
 
-    public Transform resetPoint;
+    public Transform initialResetPoint;
     
     public void Start()
     {
-        stats.Add("health", new(this, 100, 0, 100, false, true));
-        stats.Add("points", new(this, 0, 0, 0, true, false));
-        stats.Add("lives", new(this, 3, 0, 5, false, true));
+        timer = GetComponent<Timer>();
+
+        pointsText = pointsTextObject.GetComponent<TextElement>();
+        livesText = livesTextObject.GetComponent<TextElement>();
+        timeText = timeTextObject.GetComponent<TextElement>();
+
+
+        stats.Add("points", new(this, pointsText, 0, 0, 0, true, false));
+        stats.Add("lives", new(this, livesText, 3, 0, 5, false, true));
+        //stats.Add("time", new(this, timeText, 0));
+
+        //stats.Add("health", new(this,  100, 0, 100, false, true));
+    }
+
+    public void Update()
+    {
+        timeText.SetText(MathF.Round(timer.currentTime).ToString());
     }
 
     public bool HasStat(string statName)
@@ -50,7 +64,7 @@ public class Stats : MonoBehaviour
     public void ResetPosition()
     {
         CharacterController characterController = GetComponent<CharacterController>();
-        characterController.ChangePos_(resetPoint.position);
+        characterController.ChangePos_(initialResetPoint.position);
         characterController.velocity.Set(0,0,0);
         GetComponent<Player>().moveSpeed = 0;
     }
@@ -63,7 +77,8 @@ public class Stats : MonoBehaviour
 
 public class Stat
 {
-    Stats stats;
+    private Stats stats;
+    private TextElement textElement;
 
     public int value;
     public readonly int startValue;
@@ -71,17 +86,19 @@ public class Stat
     public bool clampMinValue = false, clampMaxValue = false;
     public bool belowMin = false, aboveMax = false;    
 
-    public Stat(Stats stats_, int startValue_)
+    public Stat(Stats stats_, TextElement textElement_, int startValue_)
     {
         stats = stats_;
+        textElement = textElement_;
 
         startValue = startValue_;        
         value = startValue;
     }
 
-    public Stat(Stats stats_, int startValue_, int minValue_, int maxValue_, bool clampMinValue_, bool clampMaxValue_)
+    public Stat(Stats stats_, TextElement textElement_, int startValue_, int minValue_, int maxValue_, bool clampMinValue_, bool clampMaxValue_)
     {
         stats = stats_;
+        textElement = textElement_;
 
         startValue = startValue_;
         minValue = minValue_;
@@ -94,12 +111,14 @@ public class Stat
     public void ChangeValue(int amount_)
     {
         value += amount_;
-        CheckValue();        
+        textElement?.SetText(value.ToString());
+        CheckValue();
     }
 
-    public void ResetValue(int amount_)
+    public void ResetValue()
     {
         value = startValue;
+        textElement?.SetText(value.ToString());
         CheckValue();
     }
 

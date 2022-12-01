@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 8961885494929287597}
   - component: {fileID: 8961885494929287598}
   - component: {fileID: 7111833811352744597}
+  - component: {fileID: 1323669636776626137}
   m_Layer: 0
   m_Name: Control point Trigger
   m_TagString: Untagged
@@ -220,3 +221,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resetTransform: {fileID: 6863262895607532764}
+--- !u!114 &1323669636776626137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961885494929287639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1573b6a1197ae99479d54acab8957e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentName: TRIGGERS
+  set: 1

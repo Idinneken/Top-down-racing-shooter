@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 700566165853260302}
   - component: {fileID: 2717244037689239788}
   - component: {fileID: -7614357899564255820}
-  - component: {fileID: 1769992025754737919}
+  - component: {fileID: 6502657922964323659}
   m_Layer: 0
   m_Name: Hurt Trigger
   m_TagString: Untagged
@@ -234,8 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c774cbbafa5bb8242ae3767b06aa306e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetTransform: {fileID: 0}
---- !u!114 &1769992025754737919
+  resetTransform: {fileID: 9044208907053284218}
+--- !u!114 &6502657922964323659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1573b6a1197ae99479d54acab8957e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentName: HURT TRIGGERS
+  parentName: TRIGGERS
   set: 1
 --- !u!1 &4305811017302334209
 GameObject:
