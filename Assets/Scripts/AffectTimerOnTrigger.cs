@@ -43,6 +43,10 @@ public class AffectTimerOnTrigger : MonoBehaviour
             timer_.ToggleTimer();
         }
 
+        if (action == "start")
+        {
+            timer_.StartTimer();
+        }
 
         if (action == "reset")
         {
