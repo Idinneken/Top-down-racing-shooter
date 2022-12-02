@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,7 +7,7 @@ public class TextElement : MonoBehaviour
     public string initialText;
     internal string text;
 
-    void Start()
+    void OnEnable()
     {        
         tmp_Text = GetComponent<TMP_Text>();
         SetText(initialText);

@@ -5,29 +5,41 @@ using System;
 
 public class Stats : MonoBehaviour
 {
+    public GameObject levelObject;
+    internal Level level;
+
+    internal GameObject timerObject;
     internal Timer timer;
 
-    public GameObject pointsTextObject, livesTextObject, timeTextObject;
-    internal TextElement pointsText, livesText, timeText;    
-    
+    public GameObject pointsTextObject, livesTextObject, timeTextObject, checkpointTextObject, rankTextObject, scoreTextObject;
+    internal TextElement pointsText, livesText, timeText, checkpointText, rankText, scoreText;
+
+    public GameObject rankPanel;
+
+    public KeyValuePair<string, int> rankValuePair = new();
+
     public Dictionary<string, Stat> stats = new();    
 
     public Transform initialResetPoint;
     
     public void Start()
     {
-        timer = GetComponent<Timer>();
+        level = levelObject.GetComponent<Level>();
+
+        timerObject = gameObject;
+        timer = timerObject.GetComponent<Timer>();
 
         pointsText = pointsTextObject.GetComponent<TextElement>();
         livesText = livesTextObject.GetComponent<TextElement>();
         timeText = timeTextObject.GetComponent<TextElement>();
-
+        checkpointText = checkpointTextObject.GetComponent<TextElement>();
+        scoreText = scoreTextObject.GetComponent<TextElement>();
+        rankText = rankTextObject.GetComponent<TextElement>();
 
         stats.Add("points", new(this, pointsText, 0, 0, 0, true, false));
         stats.Add("lives", new(this, livesText, 3, 0, 5, false, true));
-        //stats.Add("time", new(this, timeText, 0));
-
-        //stats.Add("health", new(this,  100, 0, 100, false, true));
+        stats.Add("checkpoints", new(this, checkpointText, 0));
+        stats.Add("score", new(this, scoreText, 0));        
     }
 
     public void Update()
@@ -47,14 +59,7 @@ public class Stats : MonoBehaviour
     }
 
     public void CheckStats()
-    {
-        print(stats["points"].value);
-
-        if (stats["health"].belowMin)
-        {
-            Die();
-        }
-
+    {        
         if (stats["lives"].belowMin)
         {
             GameOver();
@@ -67,6 +72,50 @@ public class Stats : MonoBehaviour
         characterController.ChangePos_(initialResetPoint.position);
         characterController.velocity.Set(0,0,0);
         GetComponent<Player>().moveSpeed = 0;
+    }
+
+    public void CalculateRank()
+    {
+        rankPanel.SetActiveRecursively_(true);
+
+        int timeBonus = (int)(timer.currentTime - level.timeBonusThreshold) * level.timeBonusMultiplier;
+        
+        if (timeBonus < 0)
+        {
+            timeBonus = 0;
+        }
+
+        stats["score"].value = stats["points"].value + (timeBonus);
+
+        Dictionary<string, int> availableRankScorePairs = new();
+
+        foreach (KeyValuePair<string, int> rankScorePair in level.rankScorePairs)
+        {
+            if (rankScorePair.Value <= stats["score"].value)
+            {
+                availableRankScorePairs.Add(rankScorePair.Key, rankScorePair.Value);
+            }
+        }
+
+        KeyValuePair<string, int> greatestAvailableRankScorePair = new();
+
+        foreach (KeyValuePair<string, int> rankScorePair in availableRankScorePairs)
+        {
+            print(rankScorePair.Key + " " + rankScorePair.Value);
+
+            if (rankScorePair.Value > greatestAvailableRankScorePair.Value)
+            {
+                greatestAvailableRankScorePair = rankScorePair;                
+            }
+        }
+
+        rankValuePair = greatestAvailableRankScorePair;
+
+        print(rankValuePair.Key);
+        print(rankValuePair.Value);
+
+        rankText.SetText(rankValuePair.Key);
+        scoreText.SetText(rankValuePair.Value.ToString());
     }
 
     public void GameOver()

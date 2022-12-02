@@ -212,6 +212,16 @@ namespace Extensions
             object_ = (GameObject)PrefabUtility.InstantiatePrefab(prefab_, parent_.transform);
             component_ = object_.GetComponent<T>();
         }
+
+        public static void SetActiveRecursively_(this GameObject gameObject_, bool state_)
+        {
+            gameObject_.SetActive(state_);
+
+            foreach (Transform transfrom in gameObject_.GetComponentsInChildren<Transform>())
+            {
+                transfrom.gameObject.SetActive(state_);
+            }
+        }
     }
 }
 
