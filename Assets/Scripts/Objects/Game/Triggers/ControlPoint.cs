@@ -1,9 +1,12 @@
+using Abertay.Analytics;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ControlPoint : MonoBehaviour
 {
     public GameObject levelObject;
     internal Level level;
+    public string controlpointName;
     
     void Start()
     {
@@ -17,11 +20,10 @@ public class ControlPoint : MonoBehaviour
             if(other.gameObject.GetComponent<Stats>() && other.gameObject.GetComponent<Stats>().HasStat("checkpoints"))
             {
                 other.gameObject.GetComponent<Stats>().stats["checkpoints"].ChangeValue(1);
+                level.currentControlPointNumber++;
+                level.CheckIfPlayerCanFinishLevel();
+                ControlPointTriggered(other.gameObject.GetComponent<Stats>());
             }
-
-            level.currentControlPointNumber++;
-            level.CheckIfPlayerCanFinishLevel();
-
         }
     }
 
@@ -32,11 +34,22 @@ public class ControlPoint : MonoBehaviour
             if (other.gameObject.GetComponent<Stats>() && other.gameObject.GetComponent<Stats>().HasStat("checkpoints"))
             {
                 other.gameObject.GetComponent<Stats>().stats["checkpoints"].ChangeValue(1);
+                level.currentControlPointNumber++;
+                level.CheckIfPlayerCanFinishLevel();
+                ControlPointTriggered(other.gameObject.GetComponent<Stats>());
             }
-
-            level.currentControlPointNumber++;
-            level.CheckIfPlayerCanFinishLevel();
         }
     }
 
+    public void ControlPointTriggered(Stats stats_)
+    {
+        Dictionary<string, object> controlPointParameters = new()
+        {
+            {"controlPoint", controlpointName},
+            {"controlPointsTriggeredAtPointOfTrigger", stats_.stats["checkpoints"].value},
+            {"currentTimeAtPointOfTrigger", stats_.timer.currentTime},
+            {"playerPointsAtPointOfTrigger", stats_.stats["points"].value}
+        };
+        AnalyticsManager.SendCustomEvent("ControlPointTriggered", controlPointParameters);
+    }
 }

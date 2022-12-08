@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
 using System;
+using System.Runtime.CompilerServices;
 
 public class Stats : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class Stats : MonoBehaviour
 
     public KeyValuePair<string, int> rankValuePair = new();
 
-    public Dictionary<string, Stat> stats = new();    
+    public Dictionary<string, Stat> stats = new();
+    public Dictionary<string, Axiom> axioms = new();
 
     public Transform initialResetPoint;
     
@@ -39,7 +41,11 @@ public class Stats : MonoBehaviour
         stats.Add("points", new(this, pointsText, 0, 0, 0, true, false));
         stats.Add("lives", new(this, livesText, 3, 0, 5, false, true));
         stats.Add("checkpoints", new(this, checkpointText, 0));
-        stats.Add("score", new(this, scoreText, 0));        
+        stats.Add("score", new(this, scoreText, 0));
+
+        axioms.Add("barrelsHaveBeenDestroyed", new(this, null, false));
+        axioms.Add("blueCoinsHaveBeenSelected", new(this, null, false));
+        axioms.Add("rocksHaveBeenPushed", new(this, null, false));
     }
 
     public void Update()
@@ -121,6 +127,40 @@ public class Stats : MonoBehaviour
     public void GameOver()
     {
         print("Game Over");
+    }
+}
+
+public class Axiom
+{
+    private Stats stats;
+    private TextElement textElement;
+
+    public bool state;
+    public readonly bool initialState;    
+
+    public Axiom(Stats stats_, TextElement textElement_, bool initialState_)
+    {
+        stats = stats_;
+        textElement = textElement_;
+
+        initialState = initialState_;
+        state = initialState;
+    }
+
+    public void SetState(bool state_)
+    {
+        state = state_;
+
+    }
+
+    public void ToggleState()
+    {
+        state = !state; 
+    }
+
+    public void ResetState()
+    {
+        state = initialState;
     }
 }
 

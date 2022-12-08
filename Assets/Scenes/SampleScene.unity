@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18388586, g: 0.22888055, b: 0.3022198, a: 1}
+  m_IndirectSpecularColor: {r: 0.18388587, g: 0.22888055, b: 0.30221987, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1621,7 +1621,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397998577683085655, guid: 41d854486f0f87040994640da67d7d30, type: 3}
       propertyPath: set
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7892082261894191331, guid: 41d854486f0f87040994640da67d7d30, type: 3}
       propertyPath: set
@@ -2808,6 +2808,10 @@ PrefabInstance:
       propertyPath: levelObject
       value: 
       objectReference: {fileID: 549593866}
+    - target: {fileID: 5649375404976048755, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
+      propertyPath: controlpointName
+      value: Forest
+      objectReference: {fileID: 0}
     - target: {fileID: 8873093950470920240, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
       propertyPath: requiredInvokerTags.Array.size
       value: 1
@@ -5343,8 +5347,8 @@ Transform:
   - {fileID: 386647931}
   - {fileID: 1667930407}
   - {fileID: 710011122}
-  - {fileID: 7635240327084111423}
   - {fileID: 1188684763}
+  - {fileID: 7635240327084111423}
   - {fileID: 8961885495583821805}
   - {fileID: 1968460536}
   - {fileID: 181492107}
@@ -5621,6 +5625,10 @@ PrefabInstance:
       propertyPath: levelObject
       value: 
       objectReference: {fileID: 549593866}
+    - target: {fileID: 5649375404976048755, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
+      propertyPath: controlpointName
+      value: Rocks
+      objectReference: {fileID: 0}
     - target: {fileID: 8873093950470920240, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
       propertyPath: requiredInvokerTags.Array.size
       value: 1
@@ -6200,7 +6208,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3397998577683085655, guid: 41d854486f0f87040994640da67d7d30, type: 3}
       propertyPath: set
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5095169810949114378, guid: 41d854486f0f87040994640da67d7d30, type: 3}
       propertyPath: triggerOnExit
@@ -8387,6 +8395,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 679253298}
     m_Modifications:
+    - target: {fileID: -3059964103927324657, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
+      propertyPath: requiredComponentName
+      value: Buildings
+      objectReference: {fileID: 0}
     - target: {fileID: 1323669636776626137, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
       propertyPath: set
       value: 1
@@ -9601,6 +9613,10 @@ PrefabInstance:
       propertyPath: levelObject
       value: 
       objectReference: {fileID: 549593866}
+    - target: {fileID: 5649375404976048755, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
+      propertyPath: controlpointName
+      value: Shooting range
+      objectReference: {fileID: 0}
     - target: {fileID: 8873093950470920240, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
       propertyPath: requiredInvokerTags.Array.size
       value: 1
@@ -12773,6 +12789,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 679253298}
     m_Modifications:
+    - target: {fileID: -3059964103927324657, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
+      propertyPath: requiredComponentName
+      value: Dunes
+      objectReference: {fileID: 0}
     - target: {fileID: 1323669636776626137, guid: d70cd38accf4eaf40b18cdabad56a9b5, type: 3}
       propertyPath: set
       value: 1
