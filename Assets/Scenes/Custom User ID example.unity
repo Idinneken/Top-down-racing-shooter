@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: afb200077307d5b46bd97f482e7d9085, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 9963dc2b01a415c47a90eb319562a028, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ChangeSceneOnSubmission: 1
   m_NextSceneName: GameScene
-  m_EnvironmentName: testing
+  m_EnvironmentName: iteration1
 --- !u!1001 &1810374959883231102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1111,7 +1111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1810374959312665362, guid: d0e1b03230cdb0b4684e322e8b49bdfe, type: 3}
       propertyPath: m_EnvironmentName
-      value: testing
+      value: iteration1
       objectReference: {fileID: 0}
     - target: {fileID: 1810374959312665362, guid: d0e1b03230cdb0b4684e322e8b49bdfe, type: 3}
       propertyPath: m_AbertayAnalytics
