@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Extensions;
+#if UNITY_EDITOR
 using UnityEditor;
-using Unity.VisualScripting;
+#endif
 
-[ExecuteInEditMode]
+#if UNITY_EDITOR
 public class Biome : MonoBehaviour
 {
     public GameObject biomeData;
@@ -36,3 +35,4 @@ public class Biome : MonoBehaviour
         }
     }
 }
+#endif

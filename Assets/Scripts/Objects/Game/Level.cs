@@ -18,6 +18,7 @@ public class Level : MonoBehaviour
         rankScorePairs.Add("B", 3500);
         rankScorePairs.Add("C", 3000);
         rankScorePairs.Add("D", 2000);
+        rankScorePairs.Add("F", 0);
     }
 
     public void CheckIfPlayerCanFinishLevel()

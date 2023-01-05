@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
 using System;
-using System.Runtime.CompilerServices;
 
 public class Stats : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class Stats : MonoBehaviour
 
     public GameObject rankPanel;
 
-    public KeyValuePair<string, int> rankValuePair = new();
+    public KeyValuePair<string, int> rankScorePair = new();
 
     public Dictionary<string, Stat> stats = new();
     public Dictionary<string, Axiom> axioms = new();
@@ -37,7 +36,7 @@ public class Stats : MonoBehaviour
         checkpointText = checkpointTextObject.GetComponent<TextElement>();
         scoreText = scoreTextObject.GetComponent<TextElement>();
         rankText = rankTextObject.GetComponent<TextElement>();
-
+        
         stats.Add("points", new(this, pointsText, 0, 0, 0, true, false));
         stats.Add("lives", new(this, livesText, 3, 0, 5, false, true));
         stats.Add("checkpoints", new(this, checkpointText, 0));
@@ -80,48 +79,50 @@ public class Stats : MonoBehaviour
         GetComponent<Player>().moveSpeed = 0;
     }
 
-    public void CalculateRank()
+    public void CalculateRank(Exit exit_)
     {
         rankPanel.SetActiveRecursively_(true);
 
-        int timeBonus = (int)(timer.currentTime - level.timeBonusThreshold) * level.timeBonusMultiplier;
+        int timeBonus = (int)(level.timeBonusThreshold - timer.currentTime) * level.timeBonusMultiplier;
+        //(60 - 35) = 25. 25 * 100 = 2500
+        print("timebonus: " + timeBonus);
         
         if (timeBonus < 0)
         {
             timeBonus = 0;
         }
 
-        stats["score"].value = stats["points"].value + (timeBonus);
+        stats["score"].value = stats["points"].value + timeBonus;
 
         Dictionary<string, int> availableRankScorePairs = new();
 
-        foreach (KeyValuePair<string, int> rankScorePair in level.rankScorePairs)
+        foreach (KeyValuePair<string, int> levelRankScorePair in level.rankScorePairs)
         {
-            if (rankScorePair.Value <= stats["score"].value)
+            if (levelRankScorePair.Value <= stats["score"].value)
             {
-                availableRankScorePairs.Add(rankScorePair.Key, rankScorePair.Value);
+                availableRankScorePairs.Add(levelRankScorePair.Key, levelRankScorePair.Value);
             }
         }
 
         KeyValuePair<string, int> greatestAvailableRankScorePair = new();
 
-        foreach (KeyValuePair<string, int> rankScorePair in availableRankScorePairs)
+        foreach (KeyValuePair<string, int> availableRankScorePair in availableRankScorePairs)
         {
-            print(rankScorePair.Key + " " + rankScorePair.Value);
+            print(availableRankScorePair.Key + " " + availableRankScorePair.Value);
 
-            if (rankScorePair.Value > greatestAvailableRankScorePair.Value)
+            if (availableRankScorePair.Value >= greatestAvailableRankScorePair.Value)
             {
-                greatestAvailableRankScorePair = rankScorePair;                
+                greatestAvailableRankScorePair = availableRankScorePair;                
             }
         }
 
-        rankValuePair = greatestAvailableRankScorePair;
+        rankScorePair = greatestAvailableRankScorePair;
 
-        print(rankValuePair.Key);
-        print(rankValuePair.Value);
+        print(rankScorePair.Key);
+        print(rankScorePair.Value);
 
-        rankText.SetText(rankValuePair.Key);
-        scoreText.SetText(rankValuePair.Value.ToString());
+        rankText.SetText(rankScorePair.Key);
+        scoreText.SetText(stats["score"].value.ToString());
     }
 
     public void GameOver()

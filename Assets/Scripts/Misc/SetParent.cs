@@ -1,6 +1,9 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class SetParent : MonoBehaviour
 {
     public string parentName;
@@ -15,7 +18,7 @@ public class SetParent : MonoBehaviour
     }
 
 
-#if UNITY_EDITOR
+
     private void OnValidate() => EditorApplication.delayCall += _OnValidate;
 
     private void _OnValidate()
@@ -30,7 +33,7 @@ public class SetParent : MonoBehaviour
             }
         }
     }
-#endif    
+
 
     private void SetParentDirty()
     {
@@ -42,3 +45,4 @@ public class SetParent : MonoBehaviour
         EditorUtility.ClearDirty(gameObject);
     }
 }
+#endif    

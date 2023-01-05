@@ -1,8 +1,11 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
+#if UNITY_EDITOR
 public class DrawName : MonoBehaviour
-{
+{    
     public string editorName;
     public Vector3 labelOffset;
 
@@ -34,3 +37,4 @@ public class DrawName : MonoBehaviour
 
     }
 }
+#endif

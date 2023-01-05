@@ -43,13 +43,14 @@ public class ControlPoint : MonoBehaviour
 
     public void ControlPointTriggered(Stats stats_)
     {
-        Dictionary<string, object> controlPointParameters = new()
+        Dictionary<string, object> controlPointParameters = new Dictionary<string, object>()
         {
             {"controlPoint", controlpointName},
             {"controlPointsTriggeredAtPointOfTrigger", stats_.stats["checkpoints"].value},
             {"currentTimeAtPointOfTrigger", stats_.timer.currentTime},
             {"playerPointsAtPointOfTrigger", stats_.stats["points"].value}
         };
+
         AnalyticsManager.SendCustomEvent("ControlPointTriggered", controlPointParameters);
     }
 }

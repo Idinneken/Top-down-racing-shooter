@@ -3,7 +3,10 @@ using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 using System.Collections;
 
 namespace Extensions
@@ -163,7 +166,8 @@ namespace Extensions
         {
             foreach (GameObject prefab in prefabs_)
             {                
-                objects_.Add((GameObject)PrefabUtility.InstantiatePrefab(prefab));
+                GameObject gameObject = GameObject.Instantiate(prefab);
+                objects_.Add(gameObject);
             }
 
             foreach (GameObject @object in objects_)
@@ -177,7 +181,8 @@ namespace Extensions
         {
             foreach (GameObject prefab in prefabs_)
             {                
-                objects_.Add((GameObject)PrefabUtility.InstantiatePrefab(prefab, parent_.transform));
+                GameObject gameObject = GameObject.Instantiate(prefab, parent_.transform);
+                objects_.Add(gameObject);
             }
 
             foreach (GameObject @object in objects_)
@@ -189,27 +194,27 @@ namespace Extensions
 
         public static void InstantiatePrefabAndGetComponent<T>(this MonoBehaviour _, GameObject prefab_, List<GameObject> objectListBeingAddedTo_, List<T> componentListBeingAddedTo_)
         {
-            GameObject @object = (GameObject)PrefabUtility.InstantiatePrefab(prefab_);
-            objectListBeingAddedTo_.Add(@object);            
-            componentListBeingAddedTo_.Add(@object.GetComponent<T>());            
+            GameObject gameObject = GameObject.Instantiate(prefab_);
+            objectListBeingAddedTo_.Add(gameObject);            
+            componentListBeingAddedTo_.Add(gameObject.GetComponent<T>());            
         }
 
         public static void InstantiatePrefabAndGetComponent<T>(this MonoBehaviour _, GameObject prefab_, List<GameObject> objectListBeingAddedTo_, List<T> componentListBeingAddedTo_, GameObject parent_)
         {
-            GameObject @object = (GameObject)PrefabUtility.InstantiatePrefab(prefab_, parent_.transform);
-            objectListBeingAddedTo_.Add(@object);
-            componentListBeingAddedTo_.Add(@object.GetComponent<T>());
+            GameObject gameObject = GameObject.Instantiate(prefab_, parent_.transform);
+            objectListBeingAddedTo_.Add(gameObject);
+            componentListBeingAddedTo_.Add(gameObject.GetComponent<T>());
         }
 
         public static void InstantiatePrefabAndGetComponent<T>(this MonoBehaviour mono_, GameObject prefab_, out GameObject object_, out T component_)
         {
-            object_ = (GameObject)PrefabUtility.InstantiatePrefab(prefab_);
+            object_ = GameObject.Instantiate(prefab_);
             component_ = object_.GetComponent<T>();
         }
 
         public static void InstantiatePrefabAndGetComponent<T>(this MonoBehaviour _, GameObject prefab_, out GameObject object_, out T component_, GameObject parent_)
         {
-            object_ = (GameObject)PrefabUtility.InstantiatePrefab(prefab_, parent_.transform);
+            object_ = GameObject.Instantiate(prefab_, parent_.transform);
             component_ = object_.GetComponent<T>();
         }
 
@@ -224,6 +229,3 @@ namespace Extensions
         }
     }
 }
-
-
-
