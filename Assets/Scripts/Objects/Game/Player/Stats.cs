@@ -49,7 +49,7 @@ public class Stats : MonoBehaviour
 
     public void Update()
     {
-        timeText.SetText(MathF.Round(timer.currentTime).ToString());
+        // timeText.SetText(MathF.Round(timer.currentTime).ToString());
     }
 
     public bool HasStat(string statName)

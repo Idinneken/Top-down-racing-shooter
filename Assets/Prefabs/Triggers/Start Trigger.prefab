@@ -71,7 +71,7 @@ Transform:
   m_Children:
   - {fileID: 449807408727478969}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6612052380757988780
 MonoBehaviour:
@@ -101,7 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687566dc71134c441965fec9d7b87aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggersInSequence: []
+  setActive: 0
+  objectsInSequence: []
 --- !u!114 &3135672114179256527
 MonoBehaviour:
   m_ObjectHideFlags: 0

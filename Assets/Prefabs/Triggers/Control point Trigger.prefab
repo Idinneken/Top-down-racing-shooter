@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 8961885494929287598}
   - component: {fileID: 7111833811352744597}
   - component: {fileID: 1323669636776626137}
+  - component: {fileID: 6213293813368613092}
   m_Layer: 0
   m_Name: Control point Trigger
   m_TagString: Untagged
@@ -71,7 +72,7 @@ Transform:
   m_Children:
   - {fileID: 6863262895607532764}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8873093950470920240
 MonoBehaviour:
@@ -102,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelObject: {fileID: 0}
+  controlpointName: 
 --- !u!114 &-3059964103927324657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,3 +237,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentName: TRIGGERS
   set: 1
+--- !u!114 &6213293813368613092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961885494929287639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ad21f30d194bd49a40c53fa7199146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDisabled: 1
+  toggleAfterDelayOnStart: 0
+  setStateRecursively: 0
+  toggleOnStartDelay: 0

@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 7635240326788180409}
   - component: {fileID: 5687084675488511329}
   - component: {fileID: 6503809425480051678}
+  - component: {fileID: 6343951699334280075}
+  - component: {fileID: 1845817437852283607}
+  - component: {fileID: 1455749097317014586}
   m_Layer: 0
   m_Name: Exit trigger
   m_TagString: Untagged
@@ -156,3 +159,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentName: TRIGGERS
   set: 1
+--- !u!114 &6343951699334280075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635240326788180408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5502b327d5c76fd4a9bc2f870c1f567f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: pause
+--- !u!114 &1845817437852283607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635240326788180408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615408f650d3497428789405da6d3d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToDestroy: {fileID: 0}
+  requiredComponentName: 
+--- !u!114 &1455749097317014586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635240326788180408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ad21f30d194bd49a40c53fa7199146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDisabled: 1
+  toggleAfterDelayOnStart: 0
+  setStateRecursively: 0
+  toggleOnStartDelay: 0
