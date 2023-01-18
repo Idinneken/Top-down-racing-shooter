@@ -3,8 +3,12 @@ using Extensions;
 
 public class Player : MonoBehaviour
 {
+    [Header("Objects")]
+    
+    public GameObject notificationObject;
+    internal TextElement notification;
     public LayerMask groundLayer;
-
+    
     public Transform raycastSource;
     
     public GameObject bulletPrefab;
@@ -81,8 +85,9 @@ public class Player : MonoBehaviour
     Vector3 moveSum;
 
     void Start()
-    {
+    {        
         characterController = GetComponent<CharacterController>();   
+        notification = notificationObject.GetComponent<TextElement>();
         groundChecker = groundCheckerObject.GetComponent<GeoChecker>();
         frontChecker = frontCheckerObject.GetComponent<GeoChecker>();
         backChecker = backCheckerObject.GetComponent<GeoChecker>();        

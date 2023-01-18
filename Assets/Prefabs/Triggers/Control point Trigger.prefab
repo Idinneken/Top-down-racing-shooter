@@ -51,6 +51,8 @@ GameObject:
   - component: {fileID: 7111833811352744597}
   - component: {fileID: 1323669636776626137}
   - component: {fileID: 6213293813368613092}
+  - component: {fileID: 2447411522213177573}
+  - component: {fileID: 2729073668937384713}
   m_Layer: 0
   m_Name: Control point Trigger
   m_TagString: Untagged
@@ -72,7 +74,7 @@ Transform:
   m_Children:
   - {fileID: 6863262895607532764}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8873093950470920240
 MonoBehaviour:
@@ -253,3 +255,30 @@ MonoBehaviour:
   toggleAfterDelayOnStart: 0
   setStateRecursively: 0
   toggleOnStartDelay: 0
+--- !u!114 &2447411522213177573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961885494929287639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d69f296a93a02b4e8c4cb60c8c6e6d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Checkpoint Reached
+  color: {r: 1, g: 1, b: 1, a: 1}
+  duration: 5
+--- !u!114 &2729073668937384713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961885494929287639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48984936efc0e1548acceddd3c8f971d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

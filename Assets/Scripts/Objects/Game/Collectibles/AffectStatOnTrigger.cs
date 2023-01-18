@@ -6,7 +6,7 @@ public class AffectStatOnTrigger : MonoBehaviour
     {
         if (other.gameObject.GetComponent<InvokesTriggers>() != null && gameObject.GetComponent<Trigger>() != null && gameObject.GetComponent<Trigger>().triggerOnEnter && other.gameObject.GetComponent<InvokesTriggers>().triggerTags.Contains(GetComponent<Trigger>().requiredInvokerTag))
         {
-            Stats agentStats = other.gameObject.GetComponent<Stats>() ?? (Stats)other.gameObject.GetComponent<InvokesTriggers>().associatedComponent ?? null;
+            Stats agentStats = other.gameObject.GetComponent<Stats>();            
             AffectsStat affectsStat = GetComponent<AffectsStat>();
 
             if (agentStats != null && affectsStat != null && agentStats.HasStat(affectsStat.statName))
@@ -20,7 +20,7 @@ public class AffectStatOnTrigger : MonoBehaviour
     {
         if (other.gameObject.GetComponent<InvokesTriggers>() != null && gameObject.GetComponent<Trigger>() != null && gameObject.GetComponent<Trigger>().triggerOnExit && other.gameObject.GetComponent<InvokesTriggers>().triggerTags.Contains(GetComponent<Trigger>().requiredInvokerTag))
         {
-            Stats agentStats = other.gameObject.GetComponent<Stats>() ?? (Stats)other.gameObject.GetComponent<InvokesTriggers>().associatedComponent ?? null;
+            Stats agentStats = other.gameObject.GetComponent<Stats>();
             AffectsStat affectsStat = GetComponent<AffectsStat>();
 
             if (agentStats != null && affectsStat != null && agentStats.HasStat(affectsStat.statName))

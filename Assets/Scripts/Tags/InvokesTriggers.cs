@@ -5,5 +5,7 @@ using UnityEngine;
 public class InvokesTriggers : MonoBehaviour
 {
     public List<string> triggerTags;
-    public Component associatedComponent;
+    // public Component associatedComponent;
+
+    public List<Component> associatedComponents;
 }

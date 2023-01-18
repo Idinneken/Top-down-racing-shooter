@@ -9,7 +9,7 @@ public class TextElement : MonoBehaviour
     internal string text;
 
     public bool startNotVisible;
-    public bool visibility = true, eventualVisiblity;
+    private bool visibility = true, eventualVisiblity;
     private bool settingTextVisibilityAfterDelay;
     private float settingTextVisibilityAfterDelayStartTime, settingTextVisibilityAfterDelayDuration;
 
@@ -45,16 +45,8 @@ public class TextElement : MonoBehaviour
 
         if (settingTextVisibilityAfterDelay)
         {
-            // print("settingTextVisibilityAfterDelay check is being met");
-
-            print(Time.fixedTime + " >= " + (settingTextVisibilityAfterDelayStartTime + settingTextVisibilityAfterDelayDuration));
-
             if (Time.fixedTime >= (settingTextVisibilityAfterDelayStartTime + settingTextVisibilityAfterDelayDuration))
             {
-                print("timeCheck is being met");
-                print("eventualVisiblity " + eventualVisiblity);
-
-
                 SetTextVisibility(eventualVisiblity);
                 settingTextVisibilityAfterDelay = false;
             }

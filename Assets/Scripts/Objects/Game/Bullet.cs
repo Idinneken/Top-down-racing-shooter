@@ -45,7 +45,6 @@ public class Bullet : MonoBehaviour
             this.InstantiatePrefabAndGetComponent(explosionPrefab, out explosionObject, out explosion);
             explosionObject.transform.position = transform.position;
 
-
             if (collider.gameObject.GetComponent<AddStatOnHitByBullets>() != null && collider.gameObject.GetComponent<AffectsStat>() != null && sourceObject.GetComponent<Stats>() != null && sourceObject.GetComponent<Stats>().HasStat(collider.gameObject.GetComponent<AffectsStat>().statName))
             {
                 sourceObject.GetComponent<Stats>().stats[collider.gameObject.GetComponent<AffectsStat>().statName].ChangeValue(collider.gameObject.GetComponent<AffectsStat>().value);
@@ -61,14 +60,15 @@ public class Bullet : MonoBehaviour
                 sourceObject.GetComponent<Stats>().stats[collider.gameObject.GetComponent<AffectsStat>().statName].ChangeValue(collider.gameObject.GetComponent<AffectsStat>().value);
             }
 
+            if (collider.gameObject.GetComponent<SendNotificationOnHitByBullets>() != null && collider.gameObject.GetComponent<NotifiesPlayer>() != null && sourceObject.GetComponent<Stats>() != null)
+            {
+                collider.gameObject.GetComponent<NotifiesPlayer>().SendNotification(sourceObject.GetComponent<Player>().notification);
+            }
+
             if (collider.gameObject.GetComponent<DestroyedByBullets>() != null)
             {
                 Destroy(collider.gameObject);
             }
-
-
-            // print("SourceObject: " + sourceObject.name);
-            // print("hit object: " + collider.gameObject.name);
 
             Destroy(gameObject);
         }        
