@@ -1270,6 +1270,7 @@ GameObject:
   - component: {fileID: 167362779}
   - component: {fileID: 167362780}
   - component: {fileID: 167362781}
+  - component: {fileID: 167362782}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1465,6 +1466,7 @@ MonoBehaviour:
   - player
   associatedComponents:
   - {fileID: 167362774}
+  - {fileID: 167362782}
 --- !u!114 &167362781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,6 +1482,19 @@ MonoBehaviour:
   currentTime: 0
   paused: 1
   startImmediately: 0
+--- !u!114 &167362782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167362769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ee7939e9a14c640869fc3ec323a3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventualColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &169055407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1698,8 +1713,20 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 679253298}
     m_Modifications:
+    - target: {fileID: 1495788985678295860, guid: 41d854486f0f87040994640da67d7d30, type: 3}
+      propertyPath: endColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495788985678295860, guid: 41d854486f0f87040994640da67d7d30, type: 3}
+      propertyPath: endColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3397998577683085655, guid: 41d854486f0f87040994640da67d7d30, type: 3}
       propertyPath: set
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5810662010986966256, guid: 41d854486f0f87040994640da67d7d30, type: 3}
+      propertyPath: solidOnSelect
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7892082261894191331, guid: 41d854486f0f87040994640da67d7d30, type: 3}
@@ -1724,7 +1751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8984365048250535443, guid: 41d854486f0f87040994640da67d7d30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.698061
+      value: -6.21
       objectReference: {fileID: 0}
     - target: {fileID: 8984365048250535443, guid: 41d854486f0f87040994640da67d7d30, type: 3}
       propertyPath: m_LocalPosition.z

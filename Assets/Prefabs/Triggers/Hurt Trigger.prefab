@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2717244037689239788}
   - component: {fileID: -7614357899564255820}
   - component: {fileID: 6502657922964323659}
+  - component: {fileID: 7049282913802925864}
   m_Layer: 0
   m_Name: Hurt Trigger
   m_TagString: Untagged
@@ -249,6 +250,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentName: TRIGGERS
   set: 1
+--- !u!114 &7049282913802925864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700566165853260340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da8197e90a21054191d1d37eab04fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  startColor: {r: 1, g: 0, b: 0, a: 1}
+  endColor: {r: 1, g: 1, b: 1, a: 1}
+  transitionDuration: 0.5
+  setColor: 0
+  transitionFromCustomColorToCustomColor: 0
+  transitionToCustomColorOnly: 0
+  transitionFromCustomColorOnly: 1
 --- !u!1 &4305811017302334209
 GameObject:
   m_ObjectHideFlags: 0
