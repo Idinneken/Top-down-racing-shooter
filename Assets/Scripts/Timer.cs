@@ -3,12 +3,12 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     private float referencePoint;
-    public float currentTime;
-    public bool paused = true;
-    public bool startImmediately = false;
+    public float startingTime, currentTime;
+    public bool paused = true, countsDown = false, startImmediately = false;
 
     public void Start()
     {
+        currentTime = startingTime;
         if (startImmediately)
         {
             StartTimer();
@@ -19,7 +19,16 @@ public class Timer : MonoBehaviour
     {
         if (!paused)
         {
-            currentTime = Time.fixedTime - referencePoint;
+            if (countsDown)
+            {
+                currentTime -= Time.fixedTime - referencePoint;
+            }
+            else
+            {
+                currentTime += Time.fixedTime - referencePoint;
+            }
+
+            referencePoint = Time.fixedTime;
         }
     }
 
@@ -51,18 +60,22 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public void ResetTimer(bool timerImmediatelyProgresses)
+    public void ToggleCountDirection()
     {
-        referencePoint = Time.fixedTime;
-        
-        if (timerImmediatelyProgresses)
+        countsDown = !countsDown;
+    }
+
+    public void ResetTimer(bool timerImmediatelyProgresses_)
+    {
+        currentTime = startingTime;
+
+        if (timerImmediatelyProgresses_)
         {
             StartTimer();
         }
         else
         {
-            paused = true;
-            currentTime = 0f;
+            PauseTimer();
         }
     }
 }
