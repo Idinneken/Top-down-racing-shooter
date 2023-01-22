@@ -115,7 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615408f650d3497428789405da6d3d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDestroy: {fileID: 0}
+  objectsToDestroy:
+  - {fileID: 0}
+  destroyThisOnTrigger: 1
+  destroyObjectsOnTrigger: 0
   requiredComponentName: 
 --- !u!114 &1125312528575609388
 MonoBehaviour:
