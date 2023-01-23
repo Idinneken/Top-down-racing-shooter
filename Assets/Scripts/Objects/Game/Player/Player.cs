@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSource;
 
-    private CharacterController characterController;
+    public CharacterController characterController;
 
     public GameObject groundCheckerObject;
     internal GeoChecker groundChecker;

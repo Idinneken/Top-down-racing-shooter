@@ -24,7 +24,7 @@ public class Hurt : MonoBehaviour
 
                 if (kill)
                 {
-                    other.gameObject.GetComponent<Stats>().Die();
+                    other.gameObject.GetComponent<Stats>().LoseLife();
                 }
             }            
         }      
@@ -48,7 +48,7 @@ public class Hurt : MonoBehaviour
 
                 if (kill)
                 {
-                    other.gameObject.GetComponent<Stats>().Die();
+                    other.gameObject.GetComponent<Stats>().LoseLife();
                 }
             }            
         }      

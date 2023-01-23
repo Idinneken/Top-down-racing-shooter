@@ -1,3 +1,4 @@
+using Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Level : MonoBehaviour
     public int requiredControlPointNumber, currentControlPointNumber;
     public int timeBonusThreshold, timeBonusMultiplier;
 
-    public GameObject finishTriggerObject;
+    public GameObject player, finishTriggerObject, losePanel, gameTimer, losePosition;
 
     public Dictionary<string, int> rankScorePairs = new();
 
@@ -27,6 +28,16 @@ public class Level : MonoBehaviour
         {
             finishTriggerObject.SetActive(true);
         }
+    }
 
+    public void GameOver()
+    {
+        finishTriggerObject.SetActive(false);
+        losePanel.SetActive(true);
+        GetComponent<Timescale>().SetTimescale(0.1f);
+
+        player.GetComponent<Player>().ChangePos_(player.GetComponent<Player>().characterController, losePosition.transform.position);
+        player.GetComponent<Player>().characterController.velocity.Set(0, 0, 0);
+        GetComponent<Player>().moveSpeed = 0;
     }
 }

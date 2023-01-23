@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6343951699334280075}
   - component: {fileID: 1845817437852283607}
   - component: {fileID: 1455749097317014586}
+  - component: {fileID: 46577899749767759}
   m_Layer: 0
   m_Name: Exit trigger
   m_TagString: Untagged
@@ -205,6 +206,21 @@ MonoBehaviour:
   toggleAfterDelayOnStart: 0
   setStateRecursively: 0
   toggleOnStartDelay: 0
+--- !u!114 &46577899749767759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635240326788180408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a25db9a8e093134ab45336834f2eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1
+  timescaleObject: {fileID: 0}
+  timescale: {fileID: 0}
 --- !u!1001 &3162264510664962058
 PrefabInstance:
   m_ObjectHideFlags: 0

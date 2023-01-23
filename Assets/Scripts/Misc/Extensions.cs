@@ -116,6 +116,14 @@ namespace Extensions
 
     public static class UnityExtensions
     {
+        static Level level;
+
+
+        public static Level CurrentLevel_(this MonoBehaviour monoBehaviour_)
+        {
+            return level;
+        }
+
         public static bool IsOnLayer_(this GameObject gameObject_, LayerMask layer_) 
         {
             if ((layer_.value & (1 << gameObject_.layer)) > 0)

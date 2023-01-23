@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
-using System;
 
 public class Stats : MonoBehaviour
 {
@@ -38,7 +37,7 @@ public class Stats : MonoBehaviour
         rankText = rankTextObject.GetComponent<TextElement>();
         
         stats.Add("points", new(this, pointsText, 0, 0, 0, true, false));
-        stats.Add("lives", new(this, livesText, 3, 0, 5, false, true));
+        stats.Add("lives", new(this, livesText, 3, 1, 5, false, true));
         stats.Add("checkpoints", new(this, checkpointText, 0));
         stats.Add("score", new(this, scoreText, 0));
 
@@ -57,7 +56,7 @@ public class Stats : MonoBehaviour
         return stats.ContainsKey(statName);
     }
 
-    public void Die()
+    public void LoseLife()
     {
         stats["lives"].ChangeValue(-1);
         ResetPosition();
@@ -67,7 +66,7 @@ public class Stats : MonoBehaviour
     {        
         if (stats["lives"].belowMin)
         {
-            GameOver();
+            level.GameOver();
         }
     }
 
@@ -123,11 +122,6 @@ public class Stats : MonoBehaviour
 
         rankText.SetText(rankScorePair.Key);
         scoreText.SetText(stats["score"].value.ToString());
-    }
-
-    public void GameOver()
-    {
-        print("Game Over");
     }
 }
 
