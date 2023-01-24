@@ -10,12 +10,10 @@ public class Stats : MonoBehaviour
     internal GameObject timerObject;
     internal Timer timer;
 
-    public GameObject pointsTextObject, livesTextObject, timeTextObject, checkpointTextObject, rankTextObject, scoreTextObject;
-    internal TextElement pointsText, livesText, timeText, checkpointText, rankText, scoreText;
+    public GameObject pointsTextObject, livesTextObject, timeTextObject, checkpointTextObject;
+    internal TextElement pointsText, livesText, timeText, checkpointText;
 
-    public GameObject rankPanel;
-
-    public KeyValuePair<string, int> rankScorePair = new();
+    public KeyValuePair<string, int> rankScorePair = new KeyValuePair<string, int>("dev", -1);
 
     public Dictionary<string, Stat> stats = new();
     public Dictionary<string, Axiom> axioms = new();
@@ -33,22 +31,16 @@ public class Stats : MonoBehaviour
         livesText = livesTextObject.GetComponent<TextElement>();
         timeText = timeTextObject.GetComponent<TextElement>();
         checkpointText = checkpointTextObject.GetComponent<TextElement>();
-        scoreText = scoreTextObject.GetComponent<TextElement>();
-        rankText = rankTextObject.GetComponent<TextElement>();
         
         stats.Add("points", new(this, pointsText, 0, 0, 0, true, false));
         stats.Add("lives", new(this, livesText, 3, 1, 5, false, true));
         stats.Add("checkpoints", new(this, checkpointText, 0));
-        stats.Add("score", new(this, scoreText, 0));
+        stats.Add("score", new(this, null, 0, 0, 0, true, false));
+
 
         axioms.Add("barrelsHaveBeenDestroyed", new(this, null, false));
         axioms.Add("blueCoinsHaveBeenSelected", new(this, null, false));
         axioms.Add("rocksHaveBeenPushed", new(this, null, false));
-    }
-
-    public void Update()
-    {
-        // timeText.SetText(MathF.Round(timer.currentTime).ToString());
     }
 
     public bool HasStat(string statName)
@@ -66,7 +58,7 @@ public class Stats : MonoBehaviour
     {        
         if (stats["lives"].belowMin)
         {
-            level.GameOver();
+            level.GameLose();
         }
     }
 
@@ -76,53 +68,7 @@ public class Stats : MonoBehaviour
         characterController.ChangePos_(initialResetPoint.position);
         characterController.velocity.Set(0,0,0);
         GetComponent<Player>().moveSpeed = 0;
-    }
-
-    public void CalculateRank(Exit exit_)
-    {
-        rankPanel.SetActiveRecursively_(true);
-
-        int timeBonus = (int)(level.timeBonusThreshold - timer.currentTime) * level.timeBonusMultiplier;
-        //(60 - 35) = 25. 25 * 100 = 2500
-        print("timebonus: " + timeBonus);
-        
-        if (timeBonus < 0)
-        {
-            timeBonus = 0;
-        }
-
-        stats["score"].value = stats["points"].value + timeBonus;
-
-        Dictionary<string, int> availableRankScorePairs = new();
-
-        foreach (KeyValuePair<string, int> levelRankScorePair in level.rankScorePairs)
-        {
-            if (levelRankScorePair.Value <= stats["score"].value)
-            {
-                availableRankScorePairs.Add(levelRankScorePair.Key, levelRankScorePair.Value);
-            }
-        }
-
-        KeyValuePair<string, int> greatestAvailableRankScorePair = new();
-
-        foreach (KeyValuePair<string, int> availableRankScorePair in availableRankScorePairs)
-        {
-            print(availableRankScorePair.Key + " " + availableRankScorePair.Value);
-
-            if (availableRankScorePair.Value >= greatestAvailableRankScorePair.Value)
-            {
-                greatestAvailableRankScorePair = availableRankScorePair;                
-            }
-        }
-
-        rankScorePair = greatestAvailableRankScorePair;
-
-        print(rankScorePair.Key);
-        print(rankScorePair.Value);
-
-        rankText.SetText(rankScorePair.Key);
-        scoreText.SetText(stats["score"].value.ToString());
-    }
+    }    
 }
 
 public class Axiom

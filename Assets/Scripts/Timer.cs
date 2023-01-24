@@ -4,7 +4,8 @@ public class Timer : MonoBehaviour
 {
     private float referencePoint;
     public float startingTime, currentTime;
-    public bool paused = true, countsDown = false, startImmediately = false;
+    public bool countsDown = false, startImmediately = false;
+    internal bool paused = true;
 
     public void Start()
     {

@@ -43,6 +43,9 @@ public class ControlPoint : MonoBehaviour
 
     public void ControlPointTriggered(Stats stats_)
     {
+        //print(stats_);
+        //print("controlPoint " + controlpointName);
+        
         Dictionary<string, object> controlPointParameters = new Dictionary<string, object>()
         {
             {"controlPoint", controlpointName},

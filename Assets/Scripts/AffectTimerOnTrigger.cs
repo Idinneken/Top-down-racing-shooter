@@ -1,17 +1,21 @@
 using UnityEngine;
 
 public class AffectTimerOnTrigger : MonoBehaviour
-{        
-    public string action;    
+{
+    public GameObject timerObject;
+    internal Timer timer;
+    public string action;
+
+    public void Start()
+    {
+        timer = timerObject.GetComponent<Timer>();
+    }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<InvokesTriggers>() != null && gameObject.GetComponent<Trigger>() != null && gameObject.GetComponent<Trigger>().triggerOnEnter && other.gameObject.GetComponent<InvokesTriggers>().triggerTags.Contains(GetComponent<Trigger>().requiredInvokerTag))
         {
-            if (other.gameObject.GetComponent<Timer>() != null || other.gameObject.GetComponentInChildren<Timer>() != null)
-            {
-                AffectTimer(other.gameObject.GetComponent<Timer>());
-            }
+            AffectTimer(timer);
         }
     }
 
@@ -19,10 +23,7 @@ public class AffectTimerOnTrigger : MonoBehaviour
     {
         if (other.gameObject.GetComponent<InvokesTriggers>() != null && gameObject.GetComponent<Trigger>() != null && gameObject.GetComponent<Trigger>().triggerOnExit && other.gameObject.GetComponent<InvokesTriggers>().triggerTags.Contains(GetComponent<Trigger>().requiredInvokerTag))
         {
-            if (other.gameObject.GetComponent<Timer>() != null || other.gameObject.GetComponentInChildren<Timer>() != null)
-            {
-                AffectTimer(other.gameObject.GetComponent<Timer>());
-            }
+            AffectTimer(timer);
         }
     }
 

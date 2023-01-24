@@ -9,9 +9,17 @@ public class AffectStatOnTrigger : MonoBehaviour
             Stats agentStats = other.gameObject.GetComponent<Stats>();            
             AffectsStat affectsStat = GetComponent<AffectsStat>();
 
-            if (agentStats != null && affectsStat != null && agentStats.HasStat(affectsStat.statName))
+            foreach (InvokesTriggers invokesTriggers in other.gameObject.GetComponents<InvokesTriggers>())
             {
-                agentStats.stats[affectsStat.statName].ChangeValue(affectsStat.value);
+                foreach (Component component in invokesTriggers.associatedComponents)
+                {
+                    if (component.GetType() == typeof(Stats))
+                    {
+                        Stats stats = (Stats)component;
+                        stats.stats[affectsStat.statName].ChangeValue(affectsStat.value);
+                        return;
+                    }
+                }
             }
         }
     }
@@ -23,9 +31,17 @@ public class AffectStatOnTrigger : MonoBehaviour
             Stats agentStats = other.gameObject.GetComponent<Stats>();
             AffectsStat affectsStat = GetComponent<AffectsStat>();
 
-            if (agentStats != null && affectsStat != null && agentStats.HasStat(affectsStat.statName))
+            foreach (InvokesTriggers invokesTriggers in other.gameObject.GetComponents<InvokesTriggers>())
             {
-                agentStats.stats[affectsStat.statName].ChangeValue(affectsStat.value);
+                foreach (Component component in invokesTriggers.associatedComponents)
+                {
+                    if (component.GetType() == typeof(Stats))
+                    {
+                        Stats stats = (Stats)component;
+                        stats.stats[affectsStat.statName].ChangeValue(affectsStat.value);
+                        return;
+                    }
+                }
             }
         }
     }
