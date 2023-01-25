@@ -41,7 +41,7 @@ public class Exit : MonoBehaviour
         Dictionary<string, object> exitParameters = new Dictionary<string, object>()
         {
             {"controlPointsTriggeredAtPointOfTrigger", stats_.stats["checkpoints"].value},
-            {"currentTimeAtPointOfTrigger", stats_.timer.currentTime},
+            {"currentTimeAtPointOfTrigger", stats_.level.gameTimer.currentTime},
             {"playerPointsAtPointOfTrigger", stats_.stats["points"].value},
             {"playerScoreAtPointOfTrigger", stats_.stats["score"].value},
             {"playerRankAtPointOfTrigger", stats_.rankScorePair.Key} 

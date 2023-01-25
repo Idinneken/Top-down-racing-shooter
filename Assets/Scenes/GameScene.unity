@@ -9572,7 +9572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1124942404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14581,6 +14581,7 @@ GameObject:
   - component: {fileID: 1826849696}
   - component: {fileID: 1826849698}
   - component: {fileID: 1826849697}
+  - component: {fileID: 1826849699}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -14632,6 +14633,22 @@ MonoBehaviour:
   currentTime: 0
   countsDown: 1
   startImmediately: 0
+--- !u!114 &1826849699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826849695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6aa695cde703a64cb8bcea1e4c30bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelObject: {fileID: 549593866}
+  triggerOnGreaterThanThreshold: 0
+  triggerOnLessThanThreshold: 1
+  threshold: 0
 --- !u!1001 &1849267043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17007,13 +17024,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1692555850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5ad21f30d194bd49a40c53fa7199146, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d69f296a93a02b4e8c4cb60c8c6e6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDisabled: 0
-  toggleAfterDelayOnStart: 0
-  setStateRecursively: 0
-  toggleOnStartDelay: 0
+  text: Timer Started!
+  color: {r: 1, g: 1, b: 1, a: 1}
+  duration: 3
+--- !u!114 &8961885495583821829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692555850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48984936efc0e1548acceddd3c8f971d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9143324378533157462
 MonoBehaviour:
   m_ObjectHideFlags: 0

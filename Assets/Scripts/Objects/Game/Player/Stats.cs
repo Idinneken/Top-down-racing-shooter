@@ -7,9 +7,6 @@ public class Stats : MonoBehaviour
     public GameObject levelObject;
     internal Level level;
 
-    internal GameObject timerObject;
-    internal Timer timer;
-
     public GameObject pointsTextObject, livesTextObject, timeTextObject, checkpointTextObject;
     internal TextElement pointsText, livesText, timeText, checkpointText;
 
@@ -24,9 +21,6 @@ public class Stats : MonoBehaviour
     {
         level = levelObject.GetComponent<Level>();
 
-        timerObject = gameObject;
-        timer = timerObject.GetComponent<Timer>();
-
         pointsText = pointsTextObject.GetComponent<TextElement>();
         livesText = livesTextObject.GetComponent<TextElement>();
         timeText = timeTextObject.GetComponent<TextElement>();
@@ -36,7 +30,6 @@ public class Stats : MonoBehaviour
         stats.Add("lives", new(this, livesText, 3, 1, 5, false, true));
         stats.Add("checkpoints", new(this, checkpointText, 0));
         stats.Add("score", new(this, null, 0, 0, 0, true, false));
-
 
         axioms.Add("barrelsHaveBeenDestroyed", new(this, null, false));
         axioms.Add("blueCoinsHaveBeenSelected", new(this, null, false));
