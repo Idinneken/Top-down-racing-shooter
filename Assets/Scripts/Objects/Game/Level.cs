@@ -62,9 +62,6 @@ public class Level : MonoBehaviour
 
         winPanelObject.SetActive(true);
 
-        print(playerStats);
-        print(playerStats.rankScorePair);
-
         rankText.SetText(playerStats.rankScorePair.Key);
         scoreText.SetText(playerStats.stats["score"].value.ToString());
     }
