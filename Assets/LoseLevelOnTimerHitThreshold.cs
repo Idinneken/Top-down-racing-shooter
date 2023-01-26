@@ -1,3 +1,5 @@
+using Abertay.Analytics;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LoseLevelOnTimerHitThreshold : MonoBehaviour

@@ -1,3 +1,4 @@
+using Abertay.Analytics;
 using Extensions;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class Level : MonoBehaviour
     public GameObject rankTextObject;
     public GameObject scoreTextObject;
     internal TextElement rankText, scoreText;
+
+    internal bool gameWon = false;
 
     internal Dictionary<string, int> rankScorePairs = new();
 
@@ -64,6 +67,8 @@ public class Level : MonoBehaviour
 
         rankText.SetText(playerStats.rankScorePair.Key);
         scoreText.SetText(playerStats.stats["score"].value.ToString());
+
+        GameCompleted(playerStats);
     }
 
     public void GameLose()
@@ -77,6 +82,8 @@ public class Level : MonoBehaviour
         player.ChangePos_(player.characterController, losePositionObject.transform.position);
         player.characterController.velocity.Set(0, 0, 0);
         player.moveSpeed = 0;
+
+        GameCompleted(playerStats);
     }
 
     public void CalculatePlayerScore()
@@ -115,5 +122,35 @@ public class Level : MonoBehaviour
         }
 
         playerStats.rankScorePair = greatestAvailableRankScorePair;        
+    }
+
+    //public void GameCompleted(Stats stats_)
+    //{
+    //    Dictionary<string, object> controlPointParameters = new()
+    //    {
+    //        {"gameWon", gameWon},
+    //        {"currentTimeAtPointOfTrigger", stats_.level.gameTimer.currentTime},
+    //        {"playerPointsAtPointOfTrigger", stats_.stats["points"].value}
+    //    };
+
+    //    AnalyticsManager.SendCustomEvent("ControlPointTriggered", controlPointParameters);
+    
+        
+    
+    //}
+
+    public void GameCompleted(Stats stats_)
+    {
+        Dictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            {"gameWon", gameWon},
+            {"controlPointsTriggered", stats_.stats["checkpoints"].value},
+            {"currentTime", stats_.level.gameTimer.currentTime},
+            {"playerPoints", stats_.stats["points"].value},
+            {"playerScore", stats_.stats["score"].value},
+            {"playerRank", stats_.rankScorePair.Key}
+        };
+
+        AnalyticsManager.SendCustomEvent("GameCompleted", parameters);
     }
 }

@@ -19,7 +19,6 @@ public class Exit : MonoBehaviour
             if (other.gameObject.GetComponent<Player>() != null && other.gameObject.GetComponent<Stats>() != null)
             {                
                 level.GameWin();
-                ExitTriggered(other.gameObject.GetComponent<Stats>());
             }
         }
     }
@@ -31,22 +30,9 @@ public class Exit : MonoBehaviour
             if (other.gameObject.GetComponent<Player>() != null && other.gameObject.GetComponent<Stats>() != null)
             {
                 level.GameWin(); 
-                ExitTriggered(other.gameObject.GetComponent<Stats>());
             }
         }
     }
 
-    public void ExitTriggered(Stats stats_)
-    {
-        Dictionary<string, object> exitParameters = new Dictionary<string, object>()
-        {
-            {"controlPointsTriggeredAtPointOfTrigger", stats_.stats["checkpoints"].value},
-            {"currentTimeAtPointOfTrigger", stats_.level.gameTimer.currentTime},
-            {"playerPointsAtPointOfTrigger", stats_.stats["points"].value},
-            {"playerScoreAtPointOfTrigger", stats_.stats["score"].value},
-            {"playerRankAtPointOfTrigger", stats_.rankScorePair.Key} 
-        };
-
-        AnalyticsManager.SendCustomEvent("ExitTriggered", exitParameters);
-    }
+    
 }
