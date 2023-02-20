@@ -53,6 +53,13 @@ public class Stats : MonoBehaviour
         {
             level.GameLose();
         }
+
+        level.currentPointsQuantity = stats["points"].value;
+
+        if (level.adventureMode)
+        {
+            level.CheckIfPlayerCanFinishLevel();
+        }
     }
 
     public void ResetPosition()

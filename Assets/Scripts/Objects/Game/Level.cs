@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    public int requiredControlPointNumber, currentControlPointNumber;
+    public bool timeTrialMode, adventureMode;
+        
+    public int requiredControlPointNumber, currentControlPointNumber, requiredPointsQuantity, currentPointsQuantity;
     public int timeBonusThreshold, timeBonusMultiplier;
 
     [Space]
@@ -30,6 +32,8 @@ public class Level : MonoBehaviour
 
     internal Dictionary<string, int> rankScorePairs = new();
 
+    private bool canFinishNotificationSent = false;
+
     public void Start()
     {
         player = playerObject.GetComponent<Player>();
@@ -50,10 +54,33 @@ public class Level : MonoBehaviour
 
     public void CheckIfPlayerCanFinishLevel()
     {
-        if (currentControlPointNumber >= requiredControlPointNumber)
+        if (timeTrialMode)
         {
-            finishTriggerObject.SetActive(true);
+            if (currentControlPointNumber >= requiredControlPointNumber)
+            {
+                finishTriggerObject.SetActive(true);
+
+                if (!canFinishNotificationSent)
+                {
+                    GetComponent<NotifiesPlayer>().SendNotification(player.notification);
+                }
+            }
+            
         }
+
+        if (adventureMode)
+        {
+            if (currentPointsQuantity >= requiredPointsQuantity)
+            {
+                finishTriggerObject.SetActive(true);
+
+                if (!canFinishNotificationSent)
+                {
+                    GetComponent<NotifiesPlayer>().SendNotification(player.notification);
+                }
+            }
+        }
+
     }
 
     public void GameWin()
