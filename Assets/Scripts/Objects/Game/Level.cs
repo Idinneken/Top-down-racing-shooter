@@ -29,16 +29,20 @@ public class Level : MonoBehaviour
     internal TextElement rankText, scoreText;
 
     internal bool gameWon = false;
-
     internal Dictionary<string, int> rankScorePairs = new();
 
-    private bool canFinishNotificationSent = false;
+    private float sendNotificationTime, sendNotficationDelay = 2f;
+    private bool sendingNotification = false, sentNotification = false;    
 
     public void Start()
     {
+        if (timeTrialMode)
+        {
+            gameTimer = gameTimerObject?.GetComponent<Timer>();
+        }
+
         player = playerObject.GetComponent<Player>();
         playerStats = playerObject.GetComponent<Stats>();
-        gameTimer = gameTimerObject.GetComponent<Timer>();
 
         rankText = rankTextObject.GetComponent<TextElement>();
         scoreText = scoreTextObject.GetComponent<TextElement>();
@@ -58,12 +62,9 @@ public class Level : MonoBehaviour
         {
             if (currentControlPointNumber >= requiredControlPointNumber)
             {
+                sendingNotification = true;
+                sendNotificationTime = Time.fixedTime + sendNotficationDelay;
                 finishTriggerObject.SetActive(true);
-
-                if (!canFinishNotificationSent)
-                {
-                    GetComponent<NotifiesPlayer>().SendNotification(player.notification);
-                }
             }
             
         }
@@ -72,19 +73,32 @@ public class Level : MonoBehaviour
         {
             if (currentPointsQuantity >= requiredPointsQuantity)
             {
+                sendingNotification = true;
+                sendNotificationTime = Time.fixedTime + sendNotficationDelay;
                 finishTriggerObject.SetActive(true);
-
-                if (!canFinishNotificationSent)
-                {
-                    GetComponent<NotifiesPlayer>().SendNotification(player.notification);
-                }
             }
         }
 
     }
 
+    public void Update()
+    {
+        if (sendingNotification && Time.fixedTime > sendNotificationTime && !sentNotification)
+        {
+            GetComponent<NotifiesPlayer>().SendNotification(player.notification);
+            sendingNotification = false;
+            sentNotification = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            GameWin();
+        }
+    }
+
     public void GameWin()
     {
+        gameWon = true;
         winPanelObject.SetActiveRecursively_(true);
 
         CalculatePlayerScore();
@@ -94,17 +108,17 @@ public class Level : MonoBehaviour
 
         rankText.SetText(playerStats.rankScorePair.Key);
         scoreText.SetText(playerStats.stats["score"].value.ToString());
-
         GameCompleted(playerStats);
     }
 
     public void GameLose()
     {
+        gameWon = false;
         finishTriggerObject.SetActive(false);
         losePanelObject.SetActive(true);
 
         GetComponent<Timescale>().SetTimescale(0.1f);
-        gameTimerObject.GetComponent<Timer>().PauseTimer();
+        gameTimer?.PauseTimer();
 
         player.ChangePos_(player.characterController, losePositionObject.transform.position);
         player.characterController.velocity.Set(0, 0, 0);
@@ -115,15 +129,24 @@ public class Level : MonoBehaviour
 
     public void CalculatePlayerScore()
     {
-        int timeBonus = (int)(gameTimer.currentTime - timeBonusThreshold) * timeBonusMultiplier;
-        //(90 - 60) = 30. 30 * 100 = 3000
-
-        if (timeBonus < 0)
+        if (timeTrialMode)
         {
-            timeBonus = 0;
+            int timeBonus = (int)(gameTimer.currentTime - timeBonusThreshold) * timeBonusMultiplier;
+            //(90 - 60) = 30. 30 * 100 = 3000
+
+            if (timeBonus < 0)
+            {
+                timeBonus = 0;
+            }
+
+            playerStats.stats["score"].value = playerStats.stats["points"].value + timeBonus;
         }
 
-        playerStats.stats["score"].value = playerStats.stats["points"].value + timeBonus;
+        if (adventureMode)
+        {
+            playerStats.stats["score"].value = playerStats.stats["points"].value;
+        }
+
     }
 
     public void CalculateRank()
@@ -151,32 +174,28 @@ public class Level : MonoBehaviour
         playerStats.rankScorePair = greatestAvailableRankScorePair;        
     }
 
-    //public void GameCompleted(Stats stats_)
-    //{
-    //    Dictionary<string, object> controlPointParameters = new()
-    //    {
-    //        {"gameWon", gameWon},
-    //        {"currentTimeAtPointOfTrigger", stats_.level.gameTimer.currentTime},
-    //        {"playerPointsAtPointOfTrigger", stats_.stats["points"].value}
-    //    };
-
-    //    AnalyticsManager.SendCustomEvent("ControlPointTriggered", controlPointParameters);
-    
-        
-    
-    //}
-
     public void GameCompleted(Stats stats_)
     {
-        Dictionary<string, object> parameters = new Dictionary<string, object>()
+        string modeLabel = default;
+
+        if (timeTrialMode) { modeLabel = "timeTrialMode"; }
+        if (adventureMode) { modeLabel = "adventureMode"; }
+
+        Dictionary<string, object> parameters = new()
         {
             {"gameWon", gameWon},
-            {"controlPointsTriggered", stats_.stats["checkpoints"].value},
-            {"currentTime", stats_.level.gameTimer.currentTime},
+            {"levelType", modeLabel},
+            {"controlPointsTriggered", stats_.stats["checkpoints"].value},            
             {"playerPoints", stats_.stats["points"].value},
             {"playerScore", stats_.stats["score"].value},
             {"playerRank", stats_.rankScorePair.Key}
         };
+
+        if (timeTrialMode)
+        {
+            parameters.Add("currentTime", stats_.level.gameTimer.currentTime);
+        }
+
 
         AnalyticsManager.SendCustomEvent("GameCompleted", parameters);
     }
