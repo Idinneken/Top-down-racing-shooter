@@ -4663,8 +4663,8 @@ GameObject:
   - component: {fileID: 549593868}
   - component: {fileID: 549593869}
   - component: {fileID: 549593870}
-  - component: {fileID: 549593871}
   - component: {fileID: 549593872}
+  - component: {fileID: 549593873}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -4743,20 +4743,6 @@ MonoBehaviour:
   text: Exit opened!
   color: {r: 1, g: 1, b: 1, a: 1}
   duration: 2
---- !u!114 &549593871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 549593866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 575f410d43924fc4a884c3682a52d456, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keybind: 27
-  pauseMenu: {fileID: 879333042}
 --- !u!114 &549593872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4770,6 +4756,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startVisible: 0
+--- !u!114 &549593873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549593866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575f410d43924fc4a884c3682a52d456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keybind: 27
+  pauseMenu: {fileID: 879333042}
 --- !u!1001 &551766552
 PrefabInstance:
   m_ObjectHideFlags: 0
