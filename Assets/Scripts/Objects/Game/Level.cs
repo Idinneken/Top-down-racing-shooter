@@ -65,8 +65,7 @@ public class Level : MonoBehaviour
                 sendingNotification = true;
                 sendNotificationTime = Time.fixedTime + sendNotficationDelay;
                 finishTriggerObject.SetActive(true);
-            }
-            
+            }            
         }
 
         if (adventureMode)
@@ -183,19 +182,14 @@ public class Level : MonoBehaviour
 
         Dictionary<string, object> parameters = new()
         {
-            {"gameWon", gameWon},
-            {"levelType", modeLabel},
-            {"controlPointsTriggered", stats_.stats["checkpoints"].value},            
-            {"playerPoints", stats_.stats["points"].value},
-            {"playerScore", stats_.stats["score"].value},
-            {"playerRank", stats_.rankScorePair.Key}
+            { "gameWon", gameWon },
+            { "levelType", modeLabel },
+            { "controlPointsTriggered", stats_.stats["checkpoints"].value },
+            { "playerPoints", stats_.stats["points"].value },
+            { "playerScore", stats_.stats["score"].value },
+            { "playerRank", stats_.rankScorePair.Key },
+            { "currentTime", stats_.level.gameTimer.currentTime }
         };
-
-        if (timeTrialMode)
-        {
-            parameters.Add("currentTime", stats_.level.gameTimer.currentTime);
-        }
-
 
         AnalyticsManager.SendCustomEvent("GameCompleted", parameters);
     }

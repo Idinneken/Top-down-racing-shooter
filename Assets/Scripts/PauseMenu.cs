@@ -23,7 +23,6 @@ public class PauseMenu : MonoBehaviour
 
     public void SetPauseMenuActive(bool active_)
     {
-        print("SetActive: " + active_);
         pauseMenu.SetActive(active_);
         SetCursorActive(active_);
 

@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: b590aaade8766e943a775ce87e9249fd, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: dc4e8f0bd0e097c40a4fb5e8ef8deff6, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 9963dc2b01a415c47a90eb319562a028, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1089,7 +1089,7 @@ MonoBehaviour:
   raycastSource: {fileID: 1904938595}
   bulletPrefab: {fileID: 3659960998785387273, guid: e73172dc0a27e7b44a0383f748afffed, type: 3}
   bulletSource: {fileID: 40104592}
-  characterController: {fileID: 0}
+  characterController: {fileID: 167362775}
   groundCheckerObject: {fileID: 281627379}
   frontCheckerObject: {fileID: 415865707}
   backCheckerObject: {fileID: 2019113033}
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   levelObject: {fileID: 549593866}
   pointsTextObject: {fileID: 1659705807}
   livesTextObject: {fileID: 450378193}
-  timeTextObject: {fileID: 1508506011}
+  timeTextObject: {fileID: 0}
   checkpointTextObject: {fileID: 0}
   initialResetPoint: {fileID: 1858691591}
 --- !u!114 &167362780
@@ -10119,7 +10119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 1
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
@@ -12608,7 +12608,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Time
+  m_text: RequiredPoints
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12820,7 +12820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18648a45040348f45b4c1b21c010deb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MenuScene
+  sceneName: MenuScreen
 --- !u!114 &1530179491
 MonoBehaviour:
   m_ObjectHideFlags: 0

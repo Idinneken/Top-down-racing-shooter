@@ -21,10 +21,14 @@ public class Stats : MonoBehaviour
     {
         level = levelObject.GetComponent<Level>();
 
+        if (level.timeTrialMode)
+        {
+            timeText = timeTextObject.GetComponent<TextElement>();
+            checkpointText = checkpointTextObject.GetComponent<TextElement>();
+        }
+
         pointsText = pointsTextObject.GetComponent<TextElement>();
         livesText = livesTextObject.GetComponent<TextElement>();
-        timeText = timeTextObject.GetComponent<TextElement>();
-        checkpointText = checkpointTextObject.GetComponent<TextElement>();
         
         stats.Add("points", new(this, pointsText, 0, 0, 0, true, false));
         stats.Add("lives", new(this, livesText, 3, 1, 5, false, true));
